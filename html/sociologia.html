@@ -1,0 +1,55 @@
+<!-- sociologia.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Sociologia Junina-Tech</title>
+    <link rel="stylesheet" href="../css/sociologia.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="btn-back">Voltar ao Início</a>
+        <header>
+            <h1>Sociologia & Identidade Nacional</h1>
+            <p class="subtitle">Análise de Coesão Social: O Fenômeno de Fusão do São João com a Copa do Mundo</p>
+        </header>
+
+        <main class="grid-layout">
+            <section class="analysis-box">
+                <h2>Simulador de Impacto Socioeconômico e Cultural</h2>
+                <p>Ajuste os fatores sociais abaixo para calcular dinamicamente o índice de coesão e pertencimento da comunidade local.</p>
+                
+                <div class="slider-group">
+                    <label>Fator de Identidade Regional: <span id="val-identidade">50</span>%</label>
+                    <input type="range" id="identidade" min="0" max="100" value="50">
+                    
+                    <label>Injeção de Capital Turístico: <span id="val-capital">50</span>%</label>
+                    <input type="range" id="capital" min="0" max="100" value="50">
+                    
+                    <label>Entusiasmo da Copa do Mundo (Mídia): <span id="val-copa">50</span>%</label>
+                    <input type="range" id="copa" min="0" max="100" value="50">
+                </div>
+            </section>
+
+            <section class="results-box">
+                <h2>Indicadores Sociais Calculados</h2>
+                <div class="chart-container">
+                    <div class="bar-wrapper">
+                        <span>Coesão Comunitária</span>
+                        <div class="progress-bar"><div id="bar-coesao" class="fill green"></div></div>
+                    </div>
+                    <div class="bar-wrapper">
+                        <span>Resistência à Descaracterização</span>
+                        <div class="progress-bar"><div id="bar-resistencia" class="fill yellow"></div></div>
+                    </div>
+                </div>
+                <div id="sociology-verdict" class="verdict">
+                    Ajuste os parâmetros para obter o veredito sociológico.
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../js/sociologia.js"></script>
+</body>
+</html>

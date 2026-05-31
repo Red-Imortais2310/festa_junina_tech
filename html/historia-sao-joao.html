@@ -1,0 +1,89 @@
+<!-- historia-sao-joao.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>História de São João - Tese Acadêmica</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #020704; color: #f0fdf4; margin: 0; padding: 0;}
+        
+        /* PARALLAX DA HISTÓRIA */
+        .story-hero {
+            position: relative;
+            height: 60vh;
+            background-image: url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=1200'); /* Imagem de celebração tradicional de altíssima qualidade */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .story-hero::before {
+            content: '';
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(3, 10, 6, 0.7);
+        }
+        .story-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--secondary);
+            z-index: 2;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            text-align: center;
+        }
+        .article {
+            max-width: 850px;
+            margin: -50px auto 80px auto;
+            background: rgba(10, 35, 18, 0.9);
+            border: 1px solid var(--glass-border);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            z-index: 10;
+            position: relative;
+        }
+        h2 { font-family: 'Playfair Display', serif; color: var(--secondary); margin-top: 35px; border-left: 4px solid var(--primary-light); padding-left: 15px; }
+        p { line-height: 1.8; font-size: 1.1rem; margin-bottom: 25px; text-align: justify; opacity: 0.95; }
+    </style>
+</head>
+<body>
+
+    <div class="story-hero">
+        <h1>Origem e Trajetória Histórica do São João</h1>
+    </div>
+
+    <main class="article">
+        <a href="index.html" class="btn-primary" style="margin-bottom: 45px; padding: 10px 25px;">&larr; Voltar ao Início</a>
+        
+        <h2>1. Raízes Antigas: O Culto ao Solstício de Verão</h2>
+        <p>A origem das festividades que celebramos no mês de junho remonta a rituais pagãos celebrados no hemisfério norte. Muito antes de sua incorporação ao calendário católico, os antigos povos agrários (celtas, germânicos, bascos, entre outros) prestavam reverência ao solstício de verão — momento em que o Sol atinge o ápice de sua declinação e o dia se torna o mais longo do ano.</p>
+        <p>Essas comemorações de fertilidade agradeciam pelas primeiras colheitas do ano e rogavam para que os solos não fossem devastados por pragas ou tempestades. O acendimento de fogueiras era considerado o ritual místico central. Acreditava-se que as chamas do fogo transmutador possuíam o poder de alimentar o Sol com calor regenerativo e repelir entidades malignas e pestes agrícolas.</p>
+
+        <h2>2. A Cristianização Medieval e a Construção da Liturgia Joanina</h2>
+        <p>Com a hegemonia da Igreja Católica sobre a Europa na transição para a Idade Média, o processo de consolidação dogmática exigiu a reinterpretação e absorção de tradições pagãs arraigadas na cultura dos camponeses. Ao invés de extirpar o rito do fogo do solstício, a Igreja associou-o ao calendário litúrgico cristão, declarando o dia 24 de junho como a festa do nascimento de São João Batista.</p>
+        <p>Segundo a teologia bíblica, Santa Isabel, prima de Maria (mãe de Jesus), teria acendido uma grande fogueira sobre as colinas da Judeia para avisar a Maria que o menino João havia nascido. Através dessa fusão sincrética, os antigos festivais pagãos ganharam uma justificativa cristã. O sincretismo completou-se com a adição de outros santos ao ciclo junino: Santo Antônio, no dia 13 de junho (associado ao casamento e ritos amorosos de fertilidade), e São Pedro, em 29 de junho (guardião dos portões celestes e patrono dos pescadores).</p>
+
+        <h2>3. A Transposição Cultural para as Terras Brasileiras</h2>
+        <p>A colonização das Américas trouxe a tradição das festas joaninas para o Brasil no século XVI pelas mãos dos colonizadores e dos missionários jesuítas. Ao aportar no território brasileiro, a festa portuguesa encontrou uma confluência cósmica e climática única: os povos indígenas nativos realizavam celebrações agrícolas dedicadas ao milho e à colheita no mesmo período do ano.</p>
+        <p>Com a vinda de escravizados africanos no transcorrer dos séculos, novos temperos gastronômicos, batidas rítmicas e manifestações folclóricas foram absorvidos por essa comemoração agrária. O milho consolidou-se como o coração gastronômico do festejo colonial por coincidir perfeitamente com a época da colheita no país, resultando no florescimento da culinária à base de pamonha, canjica, curau e bolos.</p>
+
+        <h2>4. A Quadrilha Junina: A Metamorfose de uma Dança de Elite</h2>
+        <p>A dança da quadrilha, tão icônica na Festa Junina brasileira, teve um início aristocrático. Sua semente é a <em>"quadrille"</em>, uma dança de salão refinada e de compasso estrito que surgiu nos palácios da alta nobreza da França do século XVIII, executada em pares fixos.</p>
+        <p>Quando a Família Real Portuguesa se refugiou no Brasil em 1808, a aristocracia carioca passou a reproduzir os passos elegantes franceses em bailes oficiais. Com o passar das décadas, a população rural se apropriou da dança e transformou-a de forma disruptiva. Os comandos de passos aristocráticos foram satirizados e abrasileirados, incorporando o folclore caipira, sanfoneiros, vestimentas coloridas com chita, o teatro do "casamento matuto" e passos dinâmicos que deram à quadrilha a energia arrebatadora de herança nordestina.</p>
+    </main>
+
+    <script>
+        // Efeito Parallax de Rolagem Avançado para o Header da História
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.story-hero');
+            let scrollY = window.scrollY;
+            hero.style.backgroundPositionY = `${scrollY * 0.4}px`;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!-- cardapio.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cardápio Junina-Tech</title>
+    <link rel="stylesheet" href="../css/cardapio.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="menu-container">
+        <a href="index.html" class="back-btn">Voltar</a>
+        <h1>Bandeja Tecnológica</h1>
+        <p>Selecione um prato na nossa bandeja flutuante 3D</p>
+
+        <!-- CARROSEL 3D DA BANDEJA -->
+        <div class="tray-viewport">
+            <button id="prev-btn" class="nav-btn">&larr;</button>
+            
+            <div class="tray-scene">
+                <!-- Bandeja de Madeira Renderizada via CSS -->
+                <div class="wooden-tray" id="tray3d">
+                    <!-- Os pratos serão renderizados pelo script.js aqui dentro -->
+                </div>
+            </div>
+
+            <button id="next-btn" class="nav-btn">&rarr;</button>
+        </div>
+
+        <!-- DETALHES DO PRATO COM BOTÃO DE VER RECEITA -->
+        <div class="dish-details" id="dish-details">
+            <h2 id="dish-title">Carregando...</h2>
+            <p id="dish-desc">Selecione seu prato predileto.</p>
+            <button id="open-recipe-btn" class="open-recipe-btn">Ver Receita & História 📜</button>
+        </div>
+
+        <!-- 20 Espaços Grid de Slots Vazio para Expansões Futuras -->
+        <div class="slots-section">
+            <h3>Gerenciador de Slots (20 Itens de Receitas)</h3>
+            <div class="slots-grid" id="slots-grid"></div>
+        </div>
+    </div>
+
+    <!-- ESTRUTURA DO MODAL DUPLO (RECEITA COM IMAGEM HD + BALÃO DE HISTÓRIA) -->
+    <div id="recipe-modal" class="modal-overlay">
+        <div class="modal-wrapper">
+            
+            <!-- CARD 1: A RECEITA (LADO ESQUERDO) -->
+            <div class="recipe-card">
+                <span id="close-modal-btn" class="modal-close">&times;</span>
+                
+                <!-- Imagem do Prato em HD -->
+                <div class="recipe-img-container">
+                    <img id="modal-imagem" src="" alt="Imagem do Prato">
+                </div>
+
+                <h2 id="modal-titulo">Título do Prato</h2>
+                
+                <h3>🥘 Ingredientes</h3>
+                <ul id="modal-ingredientes">
+                    <!-- Gerado Dinamicamente -->
+                </ul>
+                
+                <h3>🍳 Modo de Preparo</h3>
+                <p id="modal-preparo"><!-- Gerado Dinamicamente --></p>
+            </div>
+
+            <!-- CARD 2: BALÃO DE HISTÓRIA (LADO DIREITO COM A NOVA CURIOSIDADE EXTRA) -->
+            <div class="history-balloon">
+                <div class="balloon-header">
+                    <h3>📜 Curiosidades & História</h3>
+                </div>
+                
+                <!-- Nova Área de Destaque para preencher o Espaço em Branco -->
+                <div class="balloon-middle">
+                    <div class="curiosity-highlight-box">
+                        <span class="sparkle-icon">✨</span>
+                        <p id="modal-curiosidade-extra">Curiosidade especial do prato sendo carregada...</p>
+                    </div>
+                </div>
+
+                <div class="balloon-body">
+                    <p><strong>📍 Origem:</strong> <span id="modal-regiao">-</span></p>
+                    <p><strong>📅 Época:</strong> <span id="modal-ano">-</span></p>
+                    <p><strong>🍽️ Como Servir:</strong> <span id="modal-servido">-</span></p>
+                    <hr>
+                    <p id="modal-historia-texto" class="history-balloon-text"><!-- Gerado Dinamicamente --></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/cardapio.js"></script>
+</body>
+</html>
+

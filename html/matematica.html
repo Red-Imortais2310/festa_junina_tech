@@ -1,0 +1,44 @@
+<!-- matematica.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Matemática Junina-Tech</title>
+    <link rel="stylesheet" href="../css/matematica.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="btn-back">Voltar</a>
+        <h1>Matemática: Geometria & Probabilidade</h1>
+        <p>A matemática governa a engenharia do São João! Calcule o tamanho dos cabos de sustentação do mastro principal de bandeirinhas usando Pitágoras.</p>
+
+        <!-- Fórmula em LaTeX conforme instruções -->
+        <div class="formula-box">
+            $$h^2 = a^2 + b^2 \implies h = \sqrt{a^2 + b^2}$$
+        </div>
+
+        <div class="math-layout">
+            <div class="controls">
+                <h3>Ajustes Geométricos do Mastro</h3>
+                <label>Altura do Mastro ($$a$$): <span id="val-a">4</span> metros</label>
+                <input type="range" id="mastro-height" min="3" max="10" value="4">
+
+                <label>Distância da Base ($$b$$): <span id="val-b">3</span> metros</label>
+                <input type="range" id="mastro-base" min="2" max="8" value="3">
+
+                <div class="calc-box">
+                    <strong>Comprimento do cabo ($$h$$):</strong>
+                    <span id="result-hypo" class="highlight">5.00</span> m
+                </div>
+            </div>
+
+            <div class="visualizer">
+                <canvas id="math-canvas" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../js/matematica.js"></script>
+</body>
+</html>

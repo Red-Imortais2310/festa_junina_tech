@@ -1,0 +1,11 @@
+/* matematica.css */
+body { background: #030408; color: #fff; font-family: 'Poppins', sans-serif; padding: 40px; }
+.container { max-width: 900px; margin: 0 auto; text-align: center; }
+.btn-back { display: inline-block; padding: 8px 25px; background: #38b000; color: #000; font-weight: bold; text-decoration: none; border-radius: 50px; margin-bottom: 20px;}
+h1 { color: #ffd000; font-weight: 800; }
+.formula-box { background: rgba(56,176,0,0.1); border: 1px solid #38b000; padding: 15px; border-radius: 12px; margin: 20px auto; width: max-content; font-size: 1.3rem; }
+.math-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
+.calc-box { margin-top: 25px; padding: 15px; background: #004b23; border-radius: 8px; border-left: 5px solid #ffd000; }
+.highlight { font-size: 1.5rem; color: #ffd000; font-weight: bold; display: block; }
+.visualizer { background: #000; border-radius: 12px; border: 2px solid #38b000; overflow: hidden; }
+@media(max-width: 768px){.math-layout {grid-template-columns: 1fr;}}
