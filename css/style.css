@@ -340,3 +340,52 @@ footer {
     color: rgba(255,255,255,0.4);
     font-size: 0.9rem;
 }
+/* ==========================================================================
+   🎯 CSS RESPONSIVO PARA CELULARES (TELAS ATÉ 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    
+    /* 1. Ajusta o container principal da página */
+    .section-container, .container, main {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 15px !important;
+        box-sizing: border-box;
+    }
+
+    /* 2. Força o menu de links a virar uma lista vertical */
+    .nav-links {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        gap: 10px !important;
+    }
+
+    /* 3. Deixa os botões de matérias largos e fáceis de tocar no celular */
+    .nav-links a {
+        width: 90% !important;
+        text-align: center !important;
+        padding: 12px !important;
+        font-size: 16px !important;
+        box-sizing: border-box;
+    }
+
+    /* 4. Organiza as Arenas Científicas uma embaixo da outra */
+    .arenas-container, .grid-container, .flex-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        width: 100% !important;
+    }
+
+    /* 5. Ajusta os títulos para não estourarem o tamanho da tela */
+    h1 { font-size: 28px !important; text-align: center; }
+    h2 { font-size: 22px !important; text-align: center; }
+    
+    /* 6. Evita que qualquer imagem passe do limite do celular */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
