@@ -1,4 +1,3 @@
-/* style.css */
 :root {
     --primary: #004b23;
     --primary-light: #38b000;
@@ -34,6 +33,9 @@ body {
     pointer-events: none;
 }
 
+/* =====================================================
+   HEADER / PARALLAX
+   ===================================================== */
 .parallax-container {
     position: relative;
     height: 80vh;
@@ -66,6 +68,20 @@ body {
     z-index: -1;
 }
 
+/* =====================================================
+   HAMBÚRGUER DO HEADER — escondido no desktop
+   ===================================================== */
+.header-hamburger {
+    display: none;
+}
+
+.header-menu-dropdown {
+    display: none;
+}
+
+/* =====================================================
+   HERO CONTENT
+   ===================================================== */
 .hero-content {
     text-align: center;
     z-index: 2;
@@ -124,6 +140,9 @@ body {
     box-shadow: 0 8px 25px rgba(255, 208, 0, 0.6);
 }
 
+/* =====================================================
+   NAV DESKTOP
+   ===================================================== */
 .glass-nav {
     position: sticky;
     top: 20px;
@@ -180,6 +199,9 @@ body {
     border: 1px solid var(--secondary);
 }
 
+/* =====================================================
+   SECTIONS
+   ===================================================== */
 .section-container {
     max-width: 1200px;
     margin: 80px auto;
@@ -259,6 +281,9 @@ body {
     gap: 8px;
 }
 
+/* =====================================================
+   VOTING SECTION
+   ===================================================== */
 .voting-section {
     background: linear-gradient(135deg, rgba(10, 35, 18, 0.8), rgba(3, 10, 6, 0.9));
     border: 1px solid var(--glass-border);
@@ -321,6 +346,20 @@ body {
     animation: scan 3s linear infinite;
 }
 
+/* =====================================================
+   FOOTER
+   ===================================================== */
+footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.4);
+    font-size: 0.9rem;
+}
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
 @keyframes scan {
     0% { top: 0%; }
     50% { top: 100%; }
@@ -333,59 +372,187 @@ body {
     100% { transform: scale(0.8); opacity: 0.5; }
 }
 
-footer {
-    text-align: center;
-    padding: 40px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.4);
-    font-size: 0.9rem;
-}
-/* ==========================================================================
-   🎯 CSS RESPONSIVO PARA CELULARES (TELAS ATÉ 768px)
-   ========================================================================== */
+/* =====================================================
+   📱 MOBILE — max-width: 768px
+   ===================================================== */
 @media (max-width: 768px) {
-    
-    /* 1. Ajusta o container principal da página */
-    .section-container, .container, main {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 15px !important;
-        box-sizing: border-box;
+
+    /* BODY — espaço para a nav fixa */
+    body {
+        padding-top: 0;
     }
 
-    /* 2. Força o menu de links a virar uma lista vertical */
-    .nav-links {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        width: 100% !important;
-        gap: 10px !important;
+    /* PARALLAX — reduzido para o conteúdo aparecer */
+    .parallax-container {
+        height: 55vh;
+        align-items: flex-end;
+        padding-bottom: 30px;
     }
 
-    /* 3. Deixa os botões de matérias largos e fáceis de tocar no celular */
-    .nav-links a {
-        width: 90% !important;
-        text-align: center !important;
-        padding: 12px !important;
-        font-size: 16px !important;
-        box-sizing: border-box;
+    /* Vídeo de fundo mais escuro no mobile */
+    .video-overlay {
+        background: linear-gradient(180deg,
+            rgba(3, 10, 6, 0.75) 0%,
+            rgba(3, 10, 6, 0.85) 60%,
+            var(--dark-bg) 100%
+        );
     }
 
-    /* 4. Organiza as Arenas Científicas uma embaixo da outra */
-    .arenas-container, .grid-container, .flex-container {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 20px !important;
-        width: 100% !important;
+    /* Hero content — tudo visível acima do vídeo */
+    .hero-content {
+        padding: 15px;
+        z-index: 10;
     }
 
-    /* 5. Ajusta os títulos para não estourarem o tamanho da tela */
-    h1 { font-size: 28px !important; text-align: center; }
-    h2 { font-size: 22px !important; text-align: center; }
-    
-    /* 6. Evita que qualquer imagem passe do limite do celular */
-    img {
-        max-width: 100% !important;
-        height: auto !important;
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+
+    /* Esconde o botão "Iniciar Jornada" do hero no mobile */
+    .main-jornada-btn {
+        display: none;
+    }
+
+    /* ------------------------------------------------
+       HAMBÚRGUER NO HEADER — aparece no mobile
+       ------------------------------------------------ */
+    .header-hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        z-index: 9999;
+        width: 46px;
+        height: 46px;
+        background: rgba(10, 35, 18, 0.85);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        color: #fff;
+        backdrop-filter: blur(10px);
+        transition: background 0.3s;
+    }
+
+    .header-hamburger:hover {
+        background: rgba(56, 176, 0, 0.3);
+    }
+
+    /* ------------------------------------------------
+       MENU DROPDOWN DO HEADER
+       ------------------------------------------------ */
+    .header-menu-dropdown {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 75px;
+        right: 12px;
+        width: calc(100% - 24px);
+        background: rgba(5, 20, 10, 0.97);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 15px 10px;
+        z-index: 9998;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+        gap: 6px;
+    }
+
+    .header-menu-dropdown.active {
+        display: flex;
+    }
+
+    .header-menu-dropdown a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 12px 20px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: background 0.2s, color 0.2s;
+        border-left: 3px solid transparent;
+    }
+
+    .header-menu-dropdown a:hover {
+        background: rgba(56, 176, 0, 0.15);
+        border-left-color: var(--secondary);
+        color: var(--secondary);
+    }
+
+    .header-menu-dropdown a i {
+        width: 20px;
+        text-align: center;
+        color: var(--secondary);
+    }
+
+    /* Botão Iniciar Jornada dentro do menu */
+    .menu-btn-jornada {
+        background: linear-gradient(135deg, var(--primary-light), var(--primary)) !important;
+        border: 2px solid var(--secondary) !important;
+        border-radius: 50px !important;
+        text-align: center;
+        justify-content: center !important;
+        margin-top: 8px;
+        font-weight: 700 !important;
+        border-left: 2px solid var(--secondary) !important;
+    }
+
+    /* ------------------------------------------------
+       NAV GLASS — some no mobile (hambúrguer no header)
+       ------------------------------------------------ */
+    .glass-nav {
+        display: none !important;
+    }
+
+    /* ------------------------------------------------
+       ARENAS — aparecem normalmente no mobile
+       ------------------------------------------------ */
+    #brincadeiras.section-container {
+        display: block !important;
+        padding: 0 12px;
+        margin: 30px auto;
+    }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .grid-brincadeiras {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .card-tech {
+        padding: 20px;
+    }
+
+    /* ------------------------------------------------
+       VOTING SECTION
+       ------------------------------------------------ */
+    .voting-section {
+        padding: 25px 15px;
+    }
+
+    .voting-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .voting-text {
+        min-width: unset;
+    }
+
+    .voting-text h2 {
+        font-size: 1.6rem;
     }
 }

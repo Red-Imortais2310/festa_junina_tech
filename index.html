@@ -3,59 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Junina-Tech Copa 2026 Proeja </title>
+    <title>Junina-Tech Copa 2026 Proeja</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Partículas flutuantes de faísca/confete -->
     <canvas id="canvas-particles"></canvas>
 
     <header class="parallax-container">
         <div class="video-overlay"></div>
         
-        <!-- BG ALTERADO: Loop HD de fogueira de São João queimando à noite -->
         <video autoplay muted loop playsinline id="bg-video">
             <source src="https://assets.mixkit.co/videos/preview/mixkit-fire-burning-in-a-campfire-at-night-21856-large.mp4" type="video/mp4">
         </video>
 
-        <div class="hero-content">
-            <span class="badge">COPA DO MUNDO × SÃO JOÃO 2026</span>
-            <h1>FESTA JUNINA <span class="highlight">TECH</span></h1>
-            <p>A sinergia perfeita entre ciência, tecnologia, cultura e paixão nacional.</p>
-            <a href="#brincadeiras" class="btn-primary">Iniciar Jornada</a>
+        <!-- HAMBÚRGUER NO HEADER (só aparece no celular) -->
+        <div class="header-hamburger" id="header-hamburger-btn">
+            <i class="fas fa-bars"></i>
         </div>
-    </header>
 
-    <nav class="glass-nav">
-        <div class="nav-logo">🏆 JUNINA<span>COPA</span></div>
-        <div class="nav-links">
+        <!-- MENU DROPDOWN DO HEADER (só no celular) -->
+        <div class="header-menu-dropdown" id="header-menu-dropdown">
             <a href="./html/sociologia.html"><i class="fas fa-users"></i> Sociologia</a>
             <a href="./html/informatica.html"><i class="fas fa-code"></i> Informática</a>
             <a href="./html/filosofia.html"><i class="fas fa-brain"></i> Filosofia</a>
             <a href="./html/fisica.html"><i class="fas fa-atom"></i> Física</a>
             <a href="./html/quimica.html"><i class="fas fa-flask"></i> Química</a>
             <a href="./html/matematica.html"><i class="fas fa-infinity"></i> Matemática</a>
-            <a href="html/cardapio.html" class="nav-cardapio-btn">
+            <a href="./html/cardapio.html"><i class="fa-solid fa-utensils"></i> Bandeja Real</a>
+            <a href="./html/historia-sao-joao.html"><i class="fas fa-history"></i> História</a>
+            <a href="#brincadeiras" class="menu-btn-jornada">
+                <i class="fas fa-rocket"></i> Iniciar Jornada
+            </a>
+        </div>
+
+        <div class="hero-content">
+            <span class="badge">COPA DO MUNDO × SÃO JOÃO 2026</span>
+            <h1>FESTA JUNINA <span class="highlight">TECH</span></h1>
+            <p>A sinergia perfeita entre ciência, tecnologia, cultura e paixão nacional.</p>
+            <a href="#brincadeiras" class="btn-primary main-jornada-btn">Iniciar Jornada</a>
+        </div>
+    </header>
+
+    <nav class="glass-nav">
+        <div class="nav-logo">🏆 JUNINA<span>COPA</span></div>
+
+        <div class="nav-links" id="nav-links-container">
+            <a href="./html/sociologia.html"><i class="fas fa-users"></i> Sociologia</a>
+            <a href="./html/informatica.html"><i class="fas fa-code"></i> Informática</a>
+            <a href="./html/filosofia.html"><i class="fas fa-brain"></i> Filosofia</a>
+            <a href="./html/fisica.html"><i class="fas fa-atom"></i> Física</a>
+            <a href="./html/quimica.html"><i class="fas fa-flask"></i> Química</a>
+            <a href="./html/matematica.html"><i class="fas fa-infinity"></i> Matemática</a>
+            <a href="./html/cardapio.html" class="nav-cardapio-btn">
                 <div class="tray-icon">
                     <i class="fa-solid fa-utensils"></i>
                 </div>
                 <span>Bandeja Real</span>
             </a>
-            <a href="html/historia-sao-joao.html"><i class="fas fa-history"></i> História</a>
+            <a href="./html/historia-sao-joao.html"><i class="fas fa-history"></i> História</a>
         </div>
     </nav>
 
-    <section id="brincadeiras" class="section-container">
+    <section id="brincadeiras" class="section-container main-arenas-section">
         <div class="section-header">
             <h2>Arenas Científicas</h2>
             <p>Explore as ramificações acadêmicas da nossa festa através de mini-aplicações interativas.</p>
         </div>
 
         <div class="grid-brincadeiras">
-            <!-- Sociologia -->
-            <div class="card-tech" onclick="window.location.href='html/sociologia.html'">
+            <div class="card-tech" onclick="window.location.href='./html/sociologia.html'">
                 <div class="card-glow" style="--color: #00FF87;"></div>
                 <div class="card-content">
                     <div class="card-icon"><i class="fas fa-users"></i></div>
@@ -65,8 +83,7 @@
                 </div>
             </div>
 
-            <!-- Informática -->
-            <div class="card-tech" onclick="window.location.href='html/informatica.html'">
+            <div class="card-tech" onclick="window.location.href='./html/informatica.html'">
                 <div class="card-glow" style="--color: #00E5FF;"></div>
                 <div class="card-content">
                     <div class="card-icon"><i class="fas fa-code"></i></div>
@@ -76,8 +93,7 @@
                 </div>
             </div>
 
-            <!-- Filosofia -->
-            <div class="card-tech" onclick="window.location.href='html/filosofia.html'">
+            <div class="card-tech" onclick="window.location.href='./html/filosofia.html'">
                 <div class="card-glow" style="--color: #D4AF37;"></div>
                 <div class="card-content">
                     <div class="card-icon"><i class="fas fa-brain"></i></div>
@@ -87,8 +103,7 @@
                 </div>
             </div>
 
-            <!-- Física -->
-            <div class="card-tech" onclick="window.location.href='html/fisica.html'">
+            <div class="card-tech" onclick="window.location.href='./html/fisica.html'">
                 <div class="card-glow" style="--color: #FF3C00;"></div>
                 <div class="card-content">
                     <div class="card-icon"><i class="fas fa-atom"></i></div>
@@ -98,8 +113,7 @@
                 </div>
             </div>
 
-            <!-- Química -->
-            <div class="card-tech" onclick="window.location.href='html/quimica.html'">
+            <div class="card-tech" onclick="window.location.href='./html/quimica.html'">
                 <div class="card-glow" style="--color: #FF007F;"></div>
                 <div class="card-content">
                     <div class="card-icon"><i class="fas fa-flask"></i></div>
@@ -109,8 +123,7 @@
                 </div>
             </div>
 
-            <!-- Matemática -->
-            <div class="card-tech" onclick="window.location.href='html/matematica.html'">
+            <div class="card-tech" onclick="window.location.href='./html/matematica.html'">
                 <div class="card-glow" style="--color: #FFD000;"></div>
                 <div class="card-content">
                     <div class="card-icon"><i class="fas fa-infinity"></i></div>
@@ -139,11 +152,32 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Aula Junina-Tech & Copa do Mundo.Proeja 1º/2º/3º Ano.</p>
+        <p>&copy; 2026 Aula Junina-Tech & Copa do Mundo. Proeja 1º/2º/3º Ano.</p>
     </footer>
 
     <script src="js/script.js"></script>
+
+    <script>
+        // Hambúrguer do HEADER (novo, só no celular)
+        const headerHamburgerBtn = document.getElementById('header-hamburger-btn');
+        const headerMenuDropdown = document.getElementById('header-menu-dropdown');
+
+        if (headerHamburgerBtn && headerMenuDropdown) {
+            headerHamburgerBtn.addEventListener('click', () => {
+                headerMenuDropdown.classList.toggle('active');
+                const icon = headerHamburgerBtn.querySelector('i');
+                icon.className = headerMenuDropdown.classList.contains('active')
+                    ? 'fas fa-times'
+                    : 'fas fa-bars';
+            });
+
+            headerMenuDropdown.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    headerMenuDropdown.classList.remove('active');
+                    headerHamburgerBtn.querySelector('i').className = 'fas fa-bars';
+                });
+            });
+        }
+    </script>
 </body>
 </html>
-
-
