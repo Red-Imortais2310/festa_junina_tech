@@ -16,7 +16,7 @@ body {
 h1 { color: var(--secondary); font-size: 2.5rem; font-weight: 800; }
 .subtitle { opacity: 0.8; margin-bottom: 40px; }
 .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.analysis-box, .results-box { background: rgba(10,35,18,0.5); border: 1px solid var(--primary-light); padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); }
+.analysis-box, .results-box { background: rgba(10,35,18,0.5); border: 1px solid var(--primary-light); padding: 30px; border-radius: 20px; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .slider-group { display: flex; flex-direction: column; gap: 20px; margin-top: 20px; }
 .slider-group input { width: 100%; accent-color: var(--secondary); }
 .bar-wrapper { margin-bottom: 20px; }

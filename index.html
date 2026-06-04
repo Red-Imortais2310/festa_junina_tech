@@ -7,17 +7,42 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 99999;
+            display: none;
+        }
+
+        /* ✅ GLOW DOS NOVOS CARDS */
+        .card-glow-blue {
+            background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.5), transparent 70%);
+        }
+
+        .card-glow-purple {
+            background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.5), transparent 70%);
+        }
+    </style>
 </head>
 <body>
+    <canvas id="fireworks-canvas"></canvas>
     <canvas id="canvas-particles"></canvas>
 
     <header class="parallax-container">
         <div class="video-overlay"></div>
-        
-        <video autoplay muted loop playsinline id="bg-video">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-fire-burning-in-a-campfire-at-night-21856-large.mp4" type="video/mp4">
+        <video autoplay muted loop id="bg-video">
+          <source src="https://assets.mixkit.co/videos/21855/21855-720.mp4" type="video/mp4">
         </video>
+<<<<<<< HEAD
 
+=======
+>>>>>>> e3c359b16024e25d114bddd86ab528c5855c21e6
         <div class="hero-content">
             <span class="badge">COPA DO MUNDO × SÃO JOÃO 2026</span>
             <h1>FESTA JUNINA <span class="highlight">TECH</span></h1>
@@ -28,11 +53,17 @@
 
     <nav class="glass-nav">
         <div class="nav-logo">🏆 JUNINA<span>COPA</span></div>
+<<<<<<< HEAD
         
         <div class="menu-hamburger" id="hamburger-btn">
             <i class="fas fa-bars"></i>
         </div>
 
+=======
+        <div class="menu-hamburger" id="hamburger-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+>>>>>>> e3c359b16024e25d114bddd86ab528c5855c21e6
         <div class="nav-links" id="nav-links-container">
             <a href="./html/sociologia.html"><i class="fas fa-users"></i> Sociologia</a>
             <a href="./html/informatica.html"><i class="fas fa-code"></i> Informática</a>
@@ -58,6 +89,7 @@
         </div>
 
         <div class="grid-brincadeiras">
+<<<<<<< HEAD
             <div class="card-tech">
                 <div class="card-glow" style="--color: #00FF87;"></div>
                 <div class="card-content">
@@ -115,8 +147,108 @@
                     <h3>Matemática</h3>
                     <p>A geometria exata dos balões e os cálculos precisos estruturais das nossas barracas tecnológicas.</p>
                     <span class="action-text" style="color: #666;"><i class="fas fa-info-circle"></i> Veja no menu</span>
+=======
+
+            <!-- ✅ SOCIOLOGIA -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-sociologia.html'">
+                <div class="card-glow card-glow-green"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3>Sociologia</h3>
+                    <p>É o estudo da sociedade, das relações humanas, grupos sociais e das estruturas que moldam o comportamento coletivo ao longo do tempo.</p>
+                    <span class="action-text action-text-green"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
                 </div>
             </div>
+
+            <!-- ✅ INFORMÁTICA -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-informatica.html'">
+                <div class="card-glow card-glow-cyan"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>Informática</h3>
+                    <p>É a ciência do processamento automático da informação, abrangendo programação, redes, hardware, software e o impacto da tecnologia na sociedade.</p>
+                    <span class="action-text action-text-cyan"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
+                </div>
+            </div>
+
+            <!-- ✅ FILOSOFIA -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-filosofia.html'">
+                <div class="card-glow card-glow-gold"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Filosofia</h3>
+                    <p>É o estudo das grandes questões da existência humana: o que é a realidade, o conhecimento, a moral, a liberdade e o sentido da vida.</p>
+                    <span class="action-text action-text-gold"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
+                </div>
+            </div>
+
+            <!-- ✅ FÍSICA -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-fisica.html'">
+                <div class="card-glow card-glow-red-orange"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-atom"></i></div>
+                    <h3>Física</h3>
+                    <p>É a ciência que estuda os fenômenos naturais, as leis do movimento, energia, matéria e as forças que regem o universo desde o átomo até as galáxias.</p>
+                    <span class="action-text action-text-orange"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
+                </div>
+            </div>
+
+            <!-- ✅ QUÍMICA -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-quimica.html'">
+                <div class="card-glow card-glow-magenta"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Química</h3>
+                    <p>É a ciência que estuda a composição, estrutura e transformação da matéria, compreendendo as reações entre substâncias e seus efeitos no mundo.</p>
+                    <span class="action-text action-text-magenta"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
+                </div>
+            </div>
+
+            <!-- ✅ MATEMÁTICA -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-matematica.html'">
+                <div class="card-glow card-glow-yellow"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-infinity"></i></div>
+                    <h3>Matemática</h3>
+                    <p>É a ciência dos números, padrões e estruturas lógicas, essencial para resolver problemas, modelar a realidade e desenvolver o raciocínio crítico.</p>
+                    <span class="action-text action-text-yellow"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
+>>>>>>> e3c359b16024e25d114bddd86ab528c5855c21e6
+                </div>
+            </div>
+
+            <!-- ✅ HISTÓRIA -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-historia.html'">
+                <div class="card-glow card-glow-red-orange"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-history"></i></div>
+                    <h3>História</h3>
+                    <p>É o estudo dos acontecimentos, civilizações e transformações da humanidade ao longo do tempo, permitindo compreender o presente a partir do passado.</p>
+                    <span class="action-text action-text-red"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
+                </div>
+            </div>
+
+            <!-- ✅ ENGENHARIA DE SOFTWARE — NOVO -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-engenharia-software.html'">
+                <div class="card-glow card-glow-blue"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Engenharia de Software</h3>
+                    <p>É a disciplina que aplica princípios de engenharia ao desenvolvimento de software, focando em planejamento, qualidade, manutenção e boas práticas de projeto.</p>
+                    <span class="action-text action-text-blue"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
+                </div>
+            </div>
+
+            <!-- ✅ ALGORITMOS — NOVO -->
+            <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-algoritmos.html'">
+                <div class="card-glow card-glow-purple"></div>
+                <div class="card-content">
+                    <div class="card-icon"><i class="fas fa-sitemap"></i></div>
+                    <h3>Algoritmos</h3>
+                    <p>É o estudo de sequências lógicas e estruturadas de instruções para resolver problemas computacionais de forma eficiente, sendo a base de toda programação.</p>
+                    <span class="action-text action-text-purple"><i class="fas fa-play-circle"></i> Iniciar Quiz</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -127,6 +259,7 @@
             <!-- Lado Esquerdo: Apenas textos e estatísticas -->
             <div class="voting-text">
                 <h2>Mister & Musa Junina 2026</h2>
+<<<<<<< HEAD
                 <p>Faça seu pré-cadastro para validar sua identidade (Prontuário IFSP). Depois, escaneie o QR Code ao lado para acessar a urna criptografada e escolher os representantes da nossa Copa Junina!</p>
                 
                 <div class="vote-stats" style="margin-top: 20px;">
@@ -141,6 +274,18 @@
                 </a>
             </div>
 
+=======
+                <p>Faça seu pré-cadastro para validar sua identidade. Depois, escaneie o QR Code ao lado para acessar a urna criptografada e escolher os representantes da nossa Copa Junina!</p>
+                <div class="voting-text-right">
+                    <button id="btn-cadastrar" class="btn-primary voting-button-gradient">
+                        <i class="fas fa-clipboard-check"></i> Cadastrar para Votar
+                    </button>
+                </div>
+                <div class="vote-stats">
+                    <span class="live-indicator"><span class="dot"></span> LIVE VOTE</span>
+                </div>
+            </div>
+>>>>>>> e3c359b16024e25d114bddd86ab528c5855c21e6
         </div>
     </section>
 
@@ -151,14 +296,176 @@
     <script src="js/script.js"></script>
 
     <script>
+<<<<<<< HEAD
         // Script do Menu Hambúrguer unificado e limpo
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navLinksContainer = document.getElementById('nav-links-container');
 
+=======
+        // =============================================
+        // 🎆 MOTOR DE FOGOS DE ARTIFÍCIO
+        // =============================================
+        (function () {
+            const canvas = document.getElementById('fireworks-canvas');
+            const ctx = canvas.getContext('2d');
+            let animationId = null;
+            let particles = [];
+            let rockets = [];
+            let startTime = null;
+            const DURATION = 2200;
+
+            const COLORS = [
+                '#ff0', '#f90', '#f00', '#0ff', '#0f0',
+                '#f0f', '#fff', '#ff6600', '#00ffcc',
+                '#ff3399', '#33ccff', '#ffcc00'
+            ];
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor(x, y, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.color = color;
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 7 + 2;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                    this.alpha = 1;
+                    this.decay = Math.random() * 0.018 + 0.012;
+                    this.radius = Math.random() * 3 + 1.5;
+                    this.gravity = 0.12;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.vy += this.gravity;
+                    this.vx *= 0.98;
+                    this.alpha -= this.decay;
+                }
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(this.alpha, 0);
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            class Rocket {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = canvas.height;
+                    this.targetY = Math.random() * (canvas.height * 0.5) + 50;
+                    this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+                    this.speed = Math.random() * 6 + 10;
+                    this.exploded = false;
+                    this.trail = [];
+                }
+                update() {
+                    this.trail.push({ x: this.x, y: this.y });
+                    if (this.trail.length > 10) this.trail.shift();
+                    this.y -= this.speed;
+                    if (this.y <= this.targetY) this.explode();
+                }
+                explode() {
+                    this.exploded = true;
+                    const count = Math.floor(Math.random() * 60) + 80;
+                    for (let i = 0; i < count; i++) particles.push(new Particle(this.x, this.y, this.color));
+                    const color2 = COLORS[Math.floor(Math.random() * COLORS.length)];
+                    for (let i = 0; i < 30; i++) particles.push(new Particle(this.x, this.y, color2));
+                }
+                draw() {
+                    this.trail.forEach((p, i) => {
+                        ctx.save();
+                        ctx.globalAlpha = (i / this.trail.length) * 0.6;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                        ctx.fillStyle = this.color;
+                        ctx.shadowBlur = 6;
+                        ctx.shadowColor = this.color;
+                        ctx.fill();
+                        ctx.restore();
+                    });
+                    ctx.save();
+                    ctx.globalAlpha = 1;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = '#fff';
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = this.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            function launchRocket() { rockets.push(new Rocket()); }
+
+            function loop(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime;
+
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                if (elapsed < DURATION - 400) {
+                    if (Math.random() < 0.18) launchRocket();
+                }
+
+                rockets = rockets.filter(r => !r.exploded);
+                rockets.forEach(r => { r.update(); r.draw(); });
+
+                particles = particles.filter(p => p.alpha > 0);
+                particles.forEach(p => { p.update(); p.draw(); });
+
+                if (elapsed < DURATION) {
+                    animationId = requestAnimationFrame(loop);
+                } else {
+                    cancelAnimationFrame(animationId);
+                    window.location.href = 'cadastro.html';
+                }
+            }
+
+            function startFireworks() {
+                resize();
+                canvas.style.display = 'block';
+                startTime = null;
+                particles = [];
+                rockets = [];
+                for (let i = 0; i < 5; i++) launchRocket();
+                animationId = requestAnimationFrame(loop);
+            }
+
+            window.addEventListener('resize', resize);
+
+            const btnCadastrar = document.getElementById('btn-cadastrar');
+            if (btnCadastrar) {
+                btnCadastrar.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    startFireworks();
+                });
+            }
+        })();
+
+        // =============================================
+        // 🍔 MENU HAMBÚRGUER
+        // =============================================
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navLinksContainer = document.getElementById('nav-links-container');
+
+>>>>>>> e3c359b16024e25d114bddd86ab528c5855c21e6
         if (hamburgerBtn && navLinksContainer) {
             hamburgerBtn.addEventListener('click', () => {
                 navLinksContainer.classList.toggle('active');
                 const icon = hamburgerBtn.querySelector('i');
+<<<<<<< HEAD
                 if (navLinksContainer.classList.contains('active')) {
                     icon.className = 'fas fa-times';
                 } else {
@@ -167,6 +474,13 @@
             });
 
             // Fecha automaticamente ao clicar em qualquer link
+=======
+                icon.className = navLinksContainer.classList.contains('active')
+                    ? 'fas fa-times'
+                    : 'fas fa-bars';
+            });
+
+>>>>>>> e3c359b16024e25d114bddd86ab528c5855c21e6
             navLinksContainer.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinksContainer.classList.remove('active');

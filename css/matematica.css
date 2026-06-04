@@ -1,11 +1,204 @@
 /* matematica.css */
-body { background: #030408; color: #fff; font-family: 'Poppins', sans-serif; padding: 40px; }
-.container { max-width: 900px; margin: 0 auto; text-align: center; }
-.btn-back { display: inline-block; padding: 8px 25px; background: #38b000; color: #000; font-weight: bold; text-decoration: none; border-radius: 50px; margin-bottom: 20px;}
-h1 { color: #ffd000; font-weight: 800; }
-.formula-box { background: rgba(56,176,0,0.1); border: 1px solid #38b000; padding: 15px; border-radius: 12px; margin: 20px auto; width: max-content; font-size: 1.3rem; }
-.math-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: left; }
-.calc-box { margin-top: 25px; padding: 15px; background: #004b23; border-radius: 8px; border-left: 5px solid #ffd000; }
-.highlight { font-size: 1.5rem; color: #ffd000; font-weight: bold; display: block; }
-.visualizer { background: #000; border-radius: 12px; border: 2px solid #38b000; overflow: hidden; }
-@media(max-width: 768px){.math-layout {grid-template-columns: 1fr;}}
+:root {
+    --primary: #004b23;
+    --primary-light: #38b000;
+    --secondary: #ffd000;
+    --dark: #020704;
+    --accent: #00e5ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a2312 0%, #1a4d2e 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    color: white;
+}
+
+#canvas-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInDown 1s ease;
+}
+
+.page-header h1 {
+    color: var(--secondary);
+    font-size: 3rem;
+    font-weight: 800;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.2rem;
+}
+
+.content-box {
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1.2s ease;
+}
+
+.content-box h2 {
+    color: var(--secondary);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.content-box > p {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.controls {
+    margin-bottom: 30px;
+}
+
+.control-item {
+    margin-bottom: 25px;
+}
+
+.control-item label {
+    display: block;
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.control-item span {
+    color: var(--secondary);
+    font-weight: 800;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    background: var(--secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    background: var(--secondary);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.result-box {
+    background: rgba(255, 215, 0, 0.15);
+    border-left: 5px solid var(--secondary);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.result-box h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.result-box h3 span {
+    color: var(--secondary);
+    font-size: 2rem;
+}
+
+.formula {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    font-style: italic;
+}
+
+#math-canvas {
+    display: block;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .content-box {
+        padding: 25px;
+    }
+    
+    #math-canvas {
+        width: 100%;
+        height: auto;
+    }
+}
+

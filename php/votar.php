@@ -1,63 +1,47 @@
 <?php
-// votar.php
+// Configuração do Cabeçalho para API
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Origin: *"); // Permite requisições de outras origens se necessário
-header("Access-Control-Allow-Methods: POST, GET");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST");
 
-// 1. CONFIGURAÇÃO DA CONEXÃO COM O BANCO DE DADOS (Ajuste com os dados da sua hospedagem)
-$host     = "localhost";
-$dbname   = "junina_tech";
-$username = "root"; // Mude para o usuário da sua hospedagem (ex: InfinityFree)
-$password = "";     // Mude para a senha do banco da sua hospedagem
+// Credenciais do Banco
+$host     = "sql312.infinityfree.com"; 
+$dbname   = "if0_41799046_aula_junina_proeja2026";
+$username = "if0_41799046"; 
+$password = "Agenor2310"; 
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo json_encode(["status" => "erro", "mensagem" => "Falha na conexão com o banco: " . $e->getMessage()]);
-    exit;
-}
-
-// 2. LÓGICA PARA ATUALIZAR O PAINEL DE LÍDERES (Requisição GET)
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    try {
-        // Busca o Mister mais votado
-        $stmtMister = $pdo->query("SELECT id, nome, votos FROM candidatos WHERE categoria = 'Mister' ORDER BY votos DESC LIMIT 1");
-        $topMister = $stmtMister->fetch(PDO::FETCH_ASSOC);
-
-        // Busca a Miss mais votada
-        $stmtMiss = $pdo->query("SELECT id, nome, votos FROM candidatos WHERE categoria = 'Miss' ORDER BY votos DESC LIMIT 1");
-        $topMiss = $stmtMiss->fetch(PDO::FETCH_ASSOC);
-
-        echo json_encode([
-            "status" => "sucesso",
-            "topMister" => $topMister ? $topMister : ["nome" => "Nenhum cadastrado", "votos" => 0],
-            "topMiss" => $topMiss ? $topMiss : ["nome" => "Nenhuma cadastrada", "votos" => 0]
-        ]);
-    } catch (Exception $e) {
-        echo json_encode(["status" => "erro", "mensagem" => $e->getMessage()]);
-    }
-    exit;
-}
-
-// 3. LÓGICA PARA COMPUTAR O VOTO NO BANCO DE DADOS (Requisição POST)
+// 1. PROCESSAMENTO DE VOTO (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recebe o ID enviado pelo JavaScript
-    $data = json_decode(file_get_contents("php://input"), true);
-    $candidatoId = isset($data['id']) ? intval($data['id']) : 0;
-
-    if ($candidatoId > 0) {
+    $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+    
+    if ($id > 0) {
         try {
-            // Executa o comando SQL para incrementar o voto
+            $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
             $stmt = $pdo->prepare("UPDATE candidatos SET votos = votos + 1 WHERE id = ?");
-            $stmt->execute([$candidatoId]);
-
-            echo json_encode(["status" => "sucesso", "mensagem" => "Voto computado no MySQL com sucesso!"]);
-        } catch (Exception $e) {
-            echo json_encode(["status" => "erro", "mensagem" => "Erro ao gravar voto: " . $e->getMessage()]);
+            $stmt->execute([$id]);
+            
+            echo json_encode(["sucesso" => true]);
+        } catch (PDOException $e) {
+            echo json_encode(["sucesso" => false, "erro" => "Erro na base de dados: " . $e->getMessage()]);
         }
     } else {
-        echo json_encode(["status" => "erro", "mensagem" => "ID de candidato inválido."]);
+        echo json_encode(["sucesso" => false, "erro" => "ID do candidato inválido."]);
     }
     exit;
 }
+
+// 2. RETORNO DOS DADOS DOS CANDIDATOS (GET)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'listar') {
+    try {
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+        $stmt = $pdo->query("SELECT id, nome, curso, categoria, foto_caminho, votos FROM candidatos ORDER BY nome ASC");
+        $candidatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($candidatos);
+    } catch (PDOException $e) {
+        echo json_encode(["erro" => "Falha ao buscar candidatos: " . $e->getMessage()]);
+    }
+    exit;
+}
+?>
