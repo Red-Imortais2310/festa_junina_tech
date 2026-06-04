@@ -12,72 +12,44 @@
 <body>
 
     <div class="voting-container">
-        <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Início</a>
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Início</a>
         
         <header class="voting-header">
             <h1>VOTAÇÃO MISTER E MISS CAIPIRA - IFSP 2026</h1>
             <p>Escolha os seus representantes da nossa Copa Junina. Apenas um voto por dispositivo!</p>
         </header>
 
+        <!-- Painel de Líderes Mantido -->
         <section class="leaderboard-container glass-card">
             <h2><i class="fas fa-trophy" style="color: var(--secondary);"></i> Candidatos Mais Votados (Parcial)</h2>
             <div class="leaderboard-grid">
-                
                 <div class="leader-box">
-                    <div class="leader-icon-circle mr-color">
-                        <i class="fas fa-mannequin"></i>
-                    </div>
+                    <div class="leader-icon-circle mr-color"><i class="fas fa-mannequin"></i></div>
                     <div class="leader-data">
                         <span class="leader-title">Mister Mais Votado</span>
                         <strong id="top-mister-name">Carregando...</strong>
                         <span class="leader-votes"><i class="fas fa-fire"></i> <span id="top-mister-votes">0</span> votos</span>
                     </div>
                 </div>
-
                 <div class="leader-box">
-                    <div class="leader-icon-circle ms-color">
-                        <i class="fas fa-woman"></i>
-                    </div>
+                    <div class="leader-icon-circle ms-color"><i class="fas fa-woman"></i></div>
                     <div class="leader-data">
                         <span class="leader-title">Miss Mais Votada</span>
                         <strong id="top-miss-name">Carregando...</strong>
                         <span class="leader-votes"><i class="fas fa-fire"></i> <span id="top-miss-votes">0</span> votos</span>
                     </div>
                 </div>
-
             </div>
         </section>
 
         <h2 class="section-title"><i class="fas fa-user-friends"></i> Candidatos a Mister Caipira</h2>
         <main class="candidates-grid" id="grid-mister">
-            <div class="candidate-card glass-card" data-id="1">
-                <div class="photo-container">
-                    <div class="flags-streamer"></div>
-                    <div class="gender-icon-wrapper">
-                        <i class="fas fa-mannequin gender-icon"></i>
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <h3>MISTER CANDIDATO 1</h3>
-                    <button class="btn-vote" onclick="computarVoto(1)">VOTAR</button>
-                </div>
-            </div>
+            <!-- Cards injetados via JS mantendo sua estrutura original -->
         </main>
 
         <h2 class="section-title"><i class="fas fa-user-friends"></i> Candidatas a Miss Caipira</h2>
         <main class="candidates-grid" id="grid-miss">
-            <div class="candidate-card glass-card" data-id="16">
-                <div class="photo-container">
-                    <div class="flags-streamer"></div>
-                    <div class="gender-icon-wrapper">
-                        <i class="fas fa-woman gender-icon"></i>
-                    </div>
-                </div>
-                <div class="candidate-info">
-                    <h3>MISS CANDIDATA 1</h3>
-                    <button class="btn-vote" onclick="computarVoto(16)">VOTAR</button>
-                </div>
-            </div>
+            <!-- Cards injetados via JS mantendo sua estrutura original -->
         </main>
 
         <section class="rules-section glass-card">
@@ -94,133 +66,60 @@
     </footer>
 
     <script>
-        // Simulador de votos internos para poder calcular os mais votados no front
-        let bancoVotos = {};
+        document.addEventListener("DOMContentLoaded", carregarCandidatos);
 
-        document.addEventListener("DOMContentLoaded", function() {
-            inicializarBancoVotos();
-            gerarCardsFaltantes();
-            atualizarPainelLideres();
-            verificarStatusVoto();
-        });
-
-        function inicializarBancoVotos() {
-            // Se não houver dados salvos localmente, cria a contagem inicial aleatória
-            if (!localStorage.getItem("banco_votos_local")) {
-                for (let i = 1; i <= 30; i++) {
-                    bancoVotos[i] = Math.floor(Math.random() * 50); 
-                }
-                localStorage.setItem("banco_votos_local", JSON.stringify(bancoVotos));
-            } else {
-                // CORREÇÃO AQUI: Mudado de JSON.stringify para JSON.parse
-                bancoVotos = JSON.parse(localStorage.getItem("banco_votos_local"));
-            }
-        }
-
-        function gerarCardsFaltantes() {
+        async function carregarCandidatos() {
+            const response = await fetch('obter_votos.php');
+            const lista = await response.json();
+            
             const gridMister = document.getElementById('grid-mister');
             const gridMiss = document.getElementById('grid-miss');
             
-            // Limpa os grids para não duplicar os IDs criados no HTML estático
             gridMister.innerHTML = '';
             gridMiss.innerHTML = '';
 
-            // Gera os 15 cards para os Misters (IDs de 1 a 15)
-            for(let i = 1; i <= 15; i++) {
-                gridMister.innerHTML += `
-                    <div class="candidate-card glass-card" data-id="${i}">
-                        <div class="photo-container">
-                            <div class="flags-streamer"></div>
-                            <!-- Substituído o ícone pela imagem homens.jpg -->
-                            <img src="../imagens/homens.jpg" alt="Mister ${i}" class="candidate-photo">
+            lista.forEach(c => {
+                // AQUI ESTÁ A ESTRUTURA COMPLETA QUE VOCÊ CRIOU
+                const cardHTML = `
+                <div class="candidate-card glass-card" data-id="${c.id}">
+                    <div class="photo-container">
+                        <div class="flags-streamer"></div>
+                        <div class="gender-icon-wrapper">
+                            <img src="${c.foto_caminho}" alt="${c.nome}" class="candidate-photo">
                         </div>
-                        <div class="candidate-info">
-                            <h3>MISTER CANDIDATO ${i}</h3>
-                            <button class="btn-vote" onclick="computarVoto(${i})">VOTAR</button>
-                        </div>
-                    </div>`;
-            }
-
-            // Gera os 15 cards para as Misses (IDs de 16 a 30)
-            for(let i = 16; i <= 30; i++) {
-                gridMiss.innerHTML += `
-                    <div class="candidate-card glass-card" data-id="${i}">
-                        <div class="photo-container">
-                            <div class="flags-streamer"></div>
-                            <!-- Substituído o ícone pela imagem mulheres.png -->
-                            <img src="../imagens/mulheres.png" alt="Miss ${i - 15}" class="candidate-photo">
-                        </div>
-                        <div class="candidate-info">
-                            <h3>MISS CANDIDATA ${i - 15}</h3>
-                            <button class="btn-vote" onclick="computarVoto(${i})">VOTAR</button>
-                        </div>
-                    </div>`;
-            }
-        }
-
-        function computarVoto(id) {
-            if (localStorage.getItem("junina_tech_voto_efetuado")) {
-                alert("🚫 Você já realizou o seu voto! É permitido apenas um voto por dispositivo.");
-                return;
-            }
-
-            // Garante que o valor é tratado como número e incrementa
-            bancoVotos[id] = parseInt(bancoVotos[id]) + 1;
-            localStorage.setItem("banco_votos_local", JSON.stringify(bancoVotos));
-
-            localStorage.setItem("junina_tech_voto_efetuado", "true");
-            localStorage.setItem("candidato_votado", id);
-            
-            alert("🌽 Voto computado com sucesso!");
-            atualizarPainelLideres();
+                    </div>
+                    <div class="candidate-info">
+                        <h3>${c.nome}</h3>
+                        <button class="btn-vote" onclick="computarVoto(${c.id})">VOTAR</button>
+                    </div>
+                </div>`;
+                
+                if (c.categoria === 'Mister') gridMister.innerHTML += cardHTML;
+                else gridMiss.innerHTML += cardHTML;
+            });
             verificarStatusVoto();
         }
 
-        function atualizarPainelLideres() {
-            let maxMisterVotos = -1, maxMisterId = 1;
-            let maxMissVotos = -1, maxMissId = 16;
-
-            // Percorre os Misters (1 a 15)
-            for (let i = 1; i <= 15; i++) {
-                let votosAtuais = parseInt(bancoVotos[i]) || 0;
-                if (votosAtuais > maxMisterVotos) {
-                    maxMisterVotos = votosAtuais;
-                    maxMisterId = i;
-                }
-            }
-            // Percorre as Misses (16 a 30)
-            for (let i = 16; i <= 30; i++) {
-                let votosAtuais = parseInt(bancoVotos[i]) || 0;
-                if (votosAtuais > maxMissVotos) {
-                    maxMissVotos = votosAtuais;
-                    maxMissId = i;
-                }
+        async function computarVoto(id) {
+            if (localStorage.getItem("junina_tech_voto_efetuado")) {
+                alert("🚫 Você já realizou o seu voto!");
+                return;
             }
 
-            document.getElementById("top-mister-name").innerText = `MISTER CANDIDATO ${maxMisterId}`;
-            document.getElementById("top-mister-votes").innerText = maxMisterVotos;
+            const formData = new FormData();
+            formData.append('id', id);
+            await fetch('votar.php', { method: 'POST', body: formData });
 
-            document.getElementById("top-miss-name").innerText = `MISS CANDIDATA ${maxMissId - 15}`;
-            document.getElementById("top-miss-votes").innerText = maxMissVotos;
+            localStorage.setItem("junina_tech_voto_efetuado", "true");
+            location.reload();
         }
 
         function verificarStatusVoto() {
             if (localStorage.getItem("junina_tech_voto_efetuado")) {
-                const votadoId = localStorage.getItem("candidato_votado");
                 const botoes = document.querySelectorAll('.btn-vote');
-                
-                botoes.forEach(botao => {
-                    const card = botao.closest('.candidate-card');
-                    const cardId = card.getAttribute('data-id');
-                    
-                    if (cardId === votadoId) {
-                        botao.innerText = "JÁ VOTADO";
-                        botao.classList.add('voted-active');
-                    } else {
-                        botao.innerText = "VOTAR";
-                        botao.classList.add('disabled-system');
-                    }
-                    botao.disabled = true;
+                botoes.forEach(btn => { 
+                    btn.disabled = true; 
+                    btn.innerText = "JÁ VOTADO"; 
                 });
             }
         }
