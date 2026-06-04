@@ -3,7 +3,7 @@
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: Content-Type");      
 
 // Credenciais exatas do seu painel InfinityFree
 $host     = "sql312.infinityfree.com"; 
@@ -39,8 +39,8 @@ if (!empty($nome) && !empty($email) && !empty($categoria) && !empty($foto_caminh
 } else {
     echo json_encode(["status" => "erro", "mensagem" => "Campos obrigatórios vazios."]);
 }
-exit;<?php
-// cadastrar.php
+exit;
+?>
 
 // ── Credenciais InfinityFree ─────────────────────────────────
 $host    = "sql312.infinityfree.com";
