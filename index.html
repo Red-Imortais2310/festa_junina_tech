@@ -11,20 +11,15 @@
     <style>
         #fireworks-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 99999;
             display: none;
         }
-
-        /* ✅ GLOW DOS NOVOS CARDS */
         .card-glow-blue {
             background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.5), transparent 70%);
         }
-
         .card-glow-purple {
             background: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.5), transparent 70%);
         }
@@ -34,12 +29,12 @@
     <canvas id="fireworks-canvas"></canvas>
     <canvas id="canvas-particles"></canvas>
 
+    <!-- ══ HEADER ══════════════════════════════════════════════ -->
     <header class="parallax-container">
         <div class="video-overlay"></div>
         <video autoplay muted loop id="bg-video">
-          <source src="https://assets.mixkit.co/videos/21855/21855-720.mp4" type="video/mp4">
+            <source src="https://assets.mixkit.co/videos/21855/21855-720.mp4" type="video/mp4">
         </video>
-
         <div class="hero-content">
             <span class="badge">COPA DO MUNDO × SÃO JOÃO 2026</span>
             <h1>FESTA JUNINA <span class="highlight">TECH</span></h1>
@@ -48,16 +43,15 @@
         </div>
     </header>
 
+    <!-- ══ NAV ═════════════════════════════════════════════════ -->
     <nav class="glass-nav">
         <div class="nav-logo">🏆 JUNINA<span>COPA</span></div>
-        
+
+        <!-- ✅ Apenas UM botão hambúrguer -->
         <div class="menu-hamburger" id="hamburger-btn">
             <i class="fas fa-bars"></i>
         </div>
 
-        <div class="menu-hamburger" id="hamburger-btn">
-            <i class="fas fa-bars"></i>
-        </div>
         <div class="nav-links" id="nav-links-container">
             <a href="./html/sociologia.html"><i class="fas fa-users"></i> Sociologia</a>
             <a href="./html/informatica.html"><i class="fas fa-code"></i> Informática</a>
@@ -65,83 +59,25 @@
             <a href="./html/fisica.html"><i class="fas fa-atom"></i> Física</a>
             <a href="./html/quimica.html"><i class="fas fa-flask"></i> Química</a>
             <a href="./html/matematica.html"><i class="fas fa-infinity"></i> Matemática</a>
-            
             <a href="./html/cardapio.html" class="nav-cardapio-btn">
-                <div class="tray-icon">
-                    <i class="fa-solid fa-utensils"></i>
-                </div>
+                <div class="tray-icon"><i class="fa-solid fa-utensils"></i></div>
                 <span>Bandeja Real</span>
             </a>
             <a href="./html/historia-sao-joao.html"><i class="fas fa-history"></i> História</a>
         </div>
     </nav>
 
+    <!-- ══ CARDS DAS DISCIPLINAS ════════════════════════════════ -->
     <section id="brincadeiras" class="section-container main-arenas-section">
         <div class="section-header">
             <h2>Nossas Disciplinas</h2>
             <p>Conheça um pouco do que cada matéria preparou para a nossa Festa Junina Tech. Acesse os projetos completos pelo menu principal!</p>
         </div>
 
+        <!-- ✅ Grid com apenas os cards de QUIZ (sem duplicatas) -->
         <div class="grid-brincadeiras">
-            <div class="card-tech">
-                <div class="card-glow" style="--color: #00FF87;"></div>
-                <div class="card-content">
-                    <div class="card-icon"><i class="fas fa-users"></i></div>
-                    <h3>Sociologia</h3>
-                    <p>Descubra o mapeamento de impacto e a evolução da identidade cultural junina na era da globalização.</p>
-                    <span class="action-text" style="color: #666;"><i class="fas fa-info-circle"></i> Veja no menu</span>
-                </div>
-            </div>
 
-            <div class="card-tech">
-                <div class="card-glow" style="--color: #00E5FF;"></div>
-                <div class="card-content">
-                    <div class="card-icon"><i class="fas fa-code"></i></div>
-                    <h3>Informática</h3>
-                    <p>Mergulhe no algoritmo da fogueira e entenda a lógica binária por trás da nossa decoração digital.</p>
-                    <span class="action-text" style="color: #666;"><i class="fas fa-info-circle"></i> Veja no menu</span>
-                </div>
-            </div>
-
-            <div class="card-tech">
-                <div class="card-glow" style="--color: #D4AF37;"></div>
-                <div class="card-content">
-                    <div class="card-icon"><i class="fas fa-brain"></i></div>
-                    <h3>Filosofia</h3>
-                    <p>Uma reflexão profunda sobre a dialética do fogo e o mito da caverna adaptado para a nossa realidade junina.</p>
-                    <span class="action-text" style="color: #666;"><i class="fas fa-info-circle"></i> Veja no menu</span>
-                </div>
-            </div>
-
-            <div class="card-tech">
-                <div class="card-glow" style="--color: #FF3C00;"></div>
-                <div class="card-content">
-                    <div class="card-icon"><i class="fas fa-atom"></i></div>
-                    <h3>Física</h3>
-                    <p>Analise a termodinâmica das fogueiras e a física envolvida na festa mais quente do ano.</p>
-                    <span class="action-text" style="color: #666;"><i class="fas fa-info-circle"></i> Veja no menu</span>
-                </div>
-            </div>
-
-            <div class="card-tech">
-                <div class="card-glow" style="--color: #FF007F;"></div>
-                <div class="card-content">
-                    <div class="card-icon"><i class="fas fa-flask"></i></div>
-                    <h3>Química</h3>
-                    <p>O segredo das cores! Entenda a espectrometria e as reações químicas que colorem os nossos fogos.</p>
-                    <span class="action-text" style="color: #666;"><i class="fas fa-info-circle"></i> Veja no menu</span>
-                </div>
-            </div>
-
-            <div class="card-tech">
-                <div class="card-glow" style="--color: #FFD000;"></div>
-                <div class="card-content">
-                    <div class="card-icon"><i class="fas fa-infinity"></i></div>
-                    <h3>Matemática</h3>
-                    <p>A geometria exata dos balões e os cálculos precisos estruturais das nossas barracas tecnológicas.</p>
-                    <span class="action-text" style="color: #666;"><i class="fas fa-info-circle"></i> Veja no menu</span>
-
-            <!-- ✅ SOCIOLOGIA -->
+            <!-- SOCIOLOGIA -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-sociologia.html'">
                 <div class="card-glow card-glow-green"></div>
                 <div class="card-content">
@@ -152,7 +88,7 @@
                 </div>
             </div>
 
-            <!-- ✅ INFORMÁTICA -->
+            <!-- INFORMÁTICA -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-informatica.html'">
                 <div class="card-glow card-glow-cyan"></div>
                 <div class="card-content">
@@ -163,7 +99,7 @@
                 </div>
             </div>
 
-            <!-- ✅ FILOSOFIA -->
+            <!-- FILOSOFIA -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-filosofia.html'">
                 <div class="card-glow card-glow-gold"></div>
                 <div class="card-content">
@@ -174,7 +110,7 @@
                 </div>
             </div>
 
-            <!-- ✅ FÍSICA -->
+            <!-- FÍSICA -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-fisica.html'">
                 <div class="card-glow card-glow-red-orange"></div>
                 <div class="card-content">
@@ -185,7 +121,7 @@
                 </div>
             </div>
 
-            <!-- ✅ QUÍMICA -->
+            <!-- QUÍMICA -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-quimica.html'">
                 <div class="card-glow card-glow-magenta"></div>
                 <div class="card-content">
@@ -196,7 +132,7 @@
                 </div>
             </div>
 
-            <!-- ✅ MATEMÁTICA -->
+            <!-- MATEMÁTICA -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-matematica.html'">
                 <div class="card-glow card-glow-yellow"></div>
                 <div class="card-content">
@@ -207,7 +143,7 @@
                 </div>
             </div>
 
-            <!-- ✅ HISTÓRIA -->
+            <!-- HISTÓRIA -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-historia.html'">
                 <div class="card-glow card-glow-red-orange"></div>
                 <div class="card-content">
@@ -218,7 +154,7 @@
                 </div>
             </div>
 
-            <!-- ✅ ENGENHARIA DE SOFTWARE — NOVO -->
+            <!-- ENGENHARIA DE SOFTWARE -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-engenharia-software.html'">
                 <div class="card-glow card-glow-blue"></div>
                 <div class="card-content">
@@ -229,7 +165,7 @@
                 </div>
             </div>
 
-            <!-- ✅ ALGORITMOS — NOVO -->
+            <!-- ALGORITMOS -->
             <div class="card-tech card-tech-clickable" onclick="window.location.href='./html/quiz-algoritmos.html'">
                 <div class="card-glow card-glow-purple"></div>
                 <div class="card-content">
@@ -243,40 +179,29 @@
         </div>
     </section>
 
-    <!-- SECÇÃO DE VOTAÇÃO COM BOTÃO NO LADO DIREITO -->
+    <!-- ══ SEÇÃO DE VOTAÇÃO ══════════════════════════════════════ -->
+    <!-- ✅ Apenas UM botão "Cadastrar para Votar" -->
     <section class="section-container glass-card voting-section">
         <div class="voting-wrapper">
-            
-            <!-- Lado Esquerdo: Apenas textos e estatísticas -->
+
             <div class="voting-text">
                 <h2>Mister & Musa Junina 2026</h2>
                 <p>Faça seu pré-cadastro para validar sua identidade (Prontuário IFSP). Depois, escaneie o QR Code ao lado para acessar a urna criptografada e escolher os representantes da nossa Copa Junina!</p>
-                
                 <div class="vote-stats" style="margin-top: 20px;">
                     <span class="live-indicator"><span class="dot"></span> LIVE VOTE</span>
                 </div>
             </div>
-                
-                <!-- O botão foi movido para cá (Lado Direito) -->
-                <!-- LEMBRE-SE DE TROCAR O # PELO SEU LINK DO GOOGLE FORMS -->
-                <a href="#" target="_blank" class="btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(45deg, #00b09b, #96c93d); width: 100%; max-width: 220px; text-align: center; box-shadow: 0 0 15px rgba(0, 176, 155, 0.3); margin: 0;">
+
+            <div class="voting-text-right">
+                <button id="btn-cadastrar" class="btn-primary voting-button-gradient">
                     <i class="fas fa-clipboard-check"></i> Cadastrar para Votar
-                </a>
+                </button>
             </div>
 
-                <p>Faça seu pré-cadastro para validar sua identidade. Depois, escaneie o QR Code ao lado para acessar a urna criptografada e escolher os representantes da nossa Copa Junina!</p>
-                <div class="voting-text-right">
-                    <button id="btn-cadastrar" class="btn-primary voting-button-gradient">
-                        <i class="fas fa-clipboard-check"></i> Cadastrar para Votar
-                    </button>
-                </div>
-                <div class="vote-stats">
-                    <span class="live-indicator"><span class="dot"></span> LIVE VOTE</span>
-                </div>
-            </div>
         </div>
     </section>
 
+    <!-- ══ FOOTER ════════════════════════════════════════════════ -->
     <footer>
         <p>&copy; 2026 Aula Junina-Tech & Copa do Mundo. Proeja 1º/2º/3º Ano. Desenvolvido por Agenor Filho - Elisângela Lima e Lucilene Santos</p>
     </footer>
@@ -284,10 +209,6 @@
     <script src="js/script.js"></script>
 
     <script>
-        // Script do Menu Hambúrguer unificado e limpo
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const navLinksContainer = document.getElementById('nav-links-container');
-
         // =============================================
         // 🎆 MOTOR DE FOGOS DE ARTIFÍCIO
         // =============================================
@@ -301,21 +222,19 @@
             const DURATION = 2200;
 
             const COLORS = [
-                '#ff0', '#f90', '#f00', '#0ff', '#0f0',
-                '#f0f', '#fff', '#ff6600', '#00ffcc',
-                '#ff3399', '#33ccff', '#ffcc00'
+                '#ff0','#f90','#f00','#0ff','#0f0',
+                '#f0f','#fff','#ff6600','#00ffcc',
+                '#ff3399','#33ccff','#ffcc00'
             ];
 
             function resize() {
-                canvas.width = window.innerWidth;
+                canvas.width  = window.innerWidth;
                 canvas.height = window.innerHeight;
             }
 
             class Particle {
                 constructor(x, y, color) {
-                    this.x = x;
-                    this.y = y;
-                    this.color = color;
+                    this.x = x; this.y = y; this.color = color;
                     const angle = Math.random() * Math.PI * 2;
                     const speed = Math.random() * 7 + 2;
                     this.vx = Math.cos(angle) * speed;
@@ -326,8 +245,7 @@
                     this.gravity = 0.12;
                 }
                 update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
+                    this.x += this.vx; this.y += this.vy;
                     this.vy += this.gravity;
                     this.vx *= 0.98;
                     this.alpha -= this.decay;
@@ -398,7 +316,7 @@
                 if (!startTime) startTime = timestamp;
                 const elapsed = timestamp - startTime;
 
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
+                ctx.fillStyle = 'rgba(0,0,0,0.18)';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 if (elapsed < DURATION - 400) {
@@ -443,7 +361,8 @@
         // =============================================
         // 🍔 MENU HAMBÚRGUER
         // =============================================
-        // Variáveis já declaradas acima, apenas verificamos se existem
+        const hamburgerBtn      = document.getElementById('hamburger-btn');
+        const navLinksContainer = document.getElementById('nav-links-container');
 
         if (hamburgerBtn && navLinksContainer) {
             hamburgerBtn.addEventListener('click', () => {
@@ -454,7 +373,6 @@
                     : 'fas fa-bars';
             });
 
-            // Fecha automaticamente ao clicar em qualquer link
             navLinksContainer.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinksContainer.classList.remove('active');
