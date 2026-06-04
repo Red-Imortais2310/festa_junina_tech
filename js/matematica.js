@@ -17,7 +17,7 @@ function updateSymmetry() {
 }
 
 function drawTriangle(a, b) {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const scale = 20; // Escala do desenho
     const originX = 100;
@@ -56,7 +56,7 @@ function drawTriangle(a, b) {
     // Adiciona bandeirinhas decorativas sobre a hipotenusa
     ctx.fillStyle = '#00e5ff';
     ctx.beginPath();
-    ctx.arc(originX + (b*scale)/2, originY - (a*scale)/2, 6, 0, Math.PI*2);
+    ctx.arc(originX + (b * scale) / 2, originY - (a * scale) / 2, 6, 0, Math.PI * 2);
     ctx.fill();
 }
 

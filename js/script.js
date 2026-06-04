@@ -71,6 +71,7 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
+// Efeito parallax do scroll - CORRIGIDO (sem duplicação)
 window.addEventListener('scroll', () => {
     const video = document.getElementById('bg-video');
     const hero = document.querySelector('.hero-content');
@@ -83,22 +84,6 @@ window.addEventListener('scroll', () => {
         hero.style.transform = `translateY(${scrollY * 0.2}px)`;
         hero.style.opacity = 1 - scrollY / 600;
     }
-    window.addEventListener('scroll', () => {
-    const video = document.getElementById('bg-video');
-    const hero = document.querySelector('.hero-content');
-    let scrollY = window.scrollY;
-    
-    if (video) {
-        // Desloca o vídeo verticalmente mais devagar do que a velocidade normal da rolagem (fator 0.35)
-        video.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.35}px))`;
-    }
-    if (hero) {
-        // Empurra os textos do título ligeiramente e adiciona desvanecimento (fade-out) proporcional ao scroll
-        hero.style.transform = `translateY(${scrollY * 0.2}px)`;
-        hero.style.opacity = 1 - scrollY / 600;
-    }
-});
-
 });
 
 init();

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Engenharia de Software | Junina-Tech 2026</title>
+    <link rel="stylesheet" href="../css/quiz-engenharia-software.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="bg-animated">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="quiz-wrapper">
+
+        <!-- TELA INICIAL -->
+        <div id="screen-start" class="screen active">
+            <div class="screen-icon">
+                <i class="fas fa-laptop-code"></i>
+            </div>
+            <h1>Engenharia de Software</h1>
+            <p class="subtitle">Planejamento, qualidade e boas práticas no desenvolvimento de sistemas. Você conhece essa área?</p>
+            <div class="info-badges">
+                <span><i class="fas fa-question-circle"></i> 10 Perguntas</span>
+                <span><i class="fas fa-clock"></i> 20s por questão</span>
+                <span><i class="fas fa-star"></i> 10 pts cada</span>
+            </div>
+            <button class="btn-start" id="btn-start-eng">
+                <i class="fas fa-play"></i> Iniciar Quiz
+            </button>
+            <a href="../index.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Voltar ao início
+            </a>
+        </div>
+
+        <!-- TELA DO QUIZ -->
+        <div id="screen-quiz" class="screen">
+            <div class="quiz-header">
+                <div class="quiz-progress-info">
+                    <span id="question-counter">Questão 1/10</span>
+                    <span id="score-display"><i class="fas fa-star"></i> 0 pts</span>
+                </div>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="timer-wrapper">
+                    <div class="timer-circle">
+                        <svg viewBox="0 0 100 100">
+                            <circle class="timer-track" cx="50" cy="50" r="44"/>
+                            <circle class="timer-fill" id="timer-svg" cx="50" cy="50" r="44"/>
+                        </svg>
+                        <span id="timer-text">20</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p id="question-text">Carregando...</p>
+            </div>
+
+            <div class="options-grid" id="options-grid"></div>
+
+            <div id="feedback-box" class="feedback-box hidden">
+                <span id="feedback-icon"></span>
+                <span id="feedback-text"></span>
+            </div>
+        </div>
+
+        <!-- TELA DE RESULTADO -->
+        <div id="screen-result" class="screen">
+            <div class="result-icon" id="result-icon">🏆</div>
+            <h2 id="result-title">Parabéns!</h2>
+            <p id="result-subtitle">Você completou o Quiz de Engenharia de Software!</p>
+            <div class="score-card">
+                <div class="score-number" id="final-score">0</div>
+                <div class="score-label">pontos de 100</div>
+            </div>
+            <div class="score-stars" id="score-stars"></div>
+            <p class="score-message" id="score-message"></p>
+            <div class="result-buttons">
+                <button class="btn-start" id="btn-retry-eng">
+                    <i class="fas fa-redo"></i> Tentar Novamente
+                </button>
+                <a href="../index.html" class="btn-back">
+                    <i class="fas fa-home"></i> Voltar ao Início
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/quiz-engenharia-software.js"></script>
+</body>
+</html>
