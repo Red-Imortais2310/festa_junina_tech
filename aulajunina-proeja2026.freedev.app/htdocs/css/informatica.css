@@ -1,0 +1,11 @@
+/* informatica.css */
+body { background: #010402; color: #00ff66; font-family: 'Poppins', sans-serif; padding: 40px; }
+.container { max-width: 800px; margin: 0 auto; text-align: center; }
+.btn-back { display: inline-block; padding: 8px 20px; background: #004b23; border: 1px solid #ffd000; color: #fff; text-decoration: none; border-radius: 30px; margin-bottom: 25px;}
+h1 { font-weight: 800; color: #ffd000; text-shadow: 0 0 10px rgba(255,208,0,0.4); }
+.console-box { background: #050a06; border: 1px solid #00ff66; padding: 30px; border-radius: 15px; margin: 30px 0; }
+#binary-input { background: #000; border: 1px solid #00ff66; padding: 12px; color: #00ff66; font-size: 1.2rem; text-align: center; border-radius: 8px; width: 80%; font-family: 'Share Tech Mono', monospace; }
+.binary-monitor { font-family: 'Share Tech Mono', monospace; font-size: 2rem; margin-top: 20px; letter-spacing: 4px; }
+.led-grid { display: flex; justify-content: center; gap: 12px; margin-top: 25px; flex-wrap: wrap; }
+.led { width: 35px; height: 50px; background: #222; border-radius: 5px 5px 50% 50%; border: 1px solid #444; transition: all 0.3s; }
+.led.on { background: #00ff66; box-shadow: 0 0 15px #00ff66; border-color: #fff; }

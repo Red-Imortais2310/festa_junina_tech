@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Sociologia - Junina Tech 2026</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/quiz-sociologia.css?v=4">
+</head>
+
+<body>
+    <canvas id="canvas-particles"></canvas>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>👥 QUIZ DE SOCIOLOGIA</h1>
+            <p>Cultura, Identidade e Globalização — Teste seus conhecimentos!</p>
+        </header>
+
+        <div class="quiz-box" id="quiz-container">
+            <div class="question-header">
+                <span class="question-number">
+                    Questão <span id="current-q">1</span> de <span id="total-q">9</span>
+                </span>
+
+                <span class="score">
+                    Pontos: <span id="score">0</span>
+                </span>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+
+            <span class="category-tag" id="category-tag"></span>
+
+            <div class="question-content">
+                <h2 id="question-text">Carregando pergunta...</h2>
+            </div>
+
+            <div class="options" id="options-container"></div>
+
+            <button id="next-btn" type="button" class="btn-next hidden">
+                Próxima Questão ➡️
+            </button>
+        </div>
+
+        <div class="result-box hidden" id="result-container">
+            <h2>🎉 Quiz Finalizado!</h2>
+
+            <div class="final-score">
+                <p>Sua pontuação:</p>
+                <span id="final-score">0</span>
+                <p class="score-label">de 9 pontos</p>
+            </div>
+
+            <p id="feedback-text"></p>
+
+            <div class="category-score" id="category-scores"></div>
+
+            <button class="btn-restart" type="button" onclick="location.reload()">
+                🔄 Refazer Quiz
+            </button>
+
+            <br><br>
+
+            <a href="../index.html" class="btn-voltar">
+                ← Voltar ao Início
+            </a>
+        </div>
+    </div>
+
+    <script src="../js/quiz-sociologia.js?v=4"></script>
+</body>
+</html>
+

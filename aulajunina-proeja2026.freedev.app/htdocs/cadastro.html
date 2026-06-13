@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inscrição - Concurso Mister & Miss Junina 2026</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Google Sans', Roboto, Arial, sans-serif;
+      background: #f0f4f9;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+    .container {
+      width: 100%;
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card-header {
+      background: #fff;
+      border-radius: 12px;
+      border-top: 10px solid #7c3aed;
+      padding: 28px 24px 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .card-header h1 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #1f1f1f;
+      margin-bottom: 10px;
+    }
+    .card-header p {
+      color: #444;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .required-notice {
+      color: #c0392b;
+      font-size: 0.85rem;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 10px;
+    }
+    .card-question {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .question-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #1f1f1f;
+    }
+    .required-star {
+      color: #c0392b;
+      margin-left: 4px;
+    }
+    .input-text {
+      border: none;
+      border-bottom: 2px solid #ccc;
+      outline: none;
+      font-size: 1rem;
+      padding: 6px 2px;
+      width: 100%;
+      background: transparent;
+      transition: border-color 0.2s;
+    }
+    .input-text:focus {
+      border-bottom-color: #7c3aed;
+    }
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: #333;
+      cursor: pointer;
+    }
+    .radio-option input[type="radio"] {
+      accent-color: #7c3aed;
+      width: 18px;
+      height: 18px;
+    }
+    .camera-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+    }
+    .camera-video {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 12px;
+      border: 3px solid #7c3aed;
+      background: #000;
+    }
+    .camera-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .btn-camera {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-capture {
+      background: #28a745;
+      color: #fff;
+    }
+    .btn-capture:hover { background: #218838; }
+    .btn-retake {
+      background: #dc3545;
+      color: #fff;
+    }
+    .btn-retake:hover { background: #c82333; }
+    .btn-primary {
+      background: #7c3aed;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #6d28d9; }
+    .photo-preview {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 12px;
+      border: 3px solid #7c3aed;
+      display: none;
+    }
+    .form-footer {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+    }
+    #btn-enviar {
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #btn-enviar:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .clear-form {
+      background: none;
+      border: none;
+      color: #7c3aed;
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .clear-form:hover { text-decoration: underline; }
+
+    /* Toast de sucesso */
+    .toast {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a7f37;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 999;
+      animation: fadeInUp 0.4s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="toast" id="toast">✅ Inscrição realizada com sucesso!</div>
+
+<div class="container">
+  <form id="form-cadastro" action="php/cadastrar_candidato.php" method="POST" enctype="multipart/form-data">
+
+    <div class="card-header">
+      <h1>🌻 Inscrição - Concurso Mister & Miss Junina 2026</h1>
+      <p>Preencha os dados abaixo para se inscrever no concurso. Todos os campos marcados são obrigatórios.</p>
+      <div class="required-notice">* Indica que a pergunta é obrigatória</div>
+    </div>
+
+    <!-- Nome Social -->
+    <div class="card-question">
+      <div class="question-title">Nome Social <span class="required-star">*</span></div>
+      <input type="text" name="nome_social" class="input-text" placeholder="Digite seu nome social" required />
+    </div>
+
+    <!-- Matrícula -->
+    <div class="card-question">
+      <div class="question-title">Matrícula <span class="required-star">*</span></div>
+      <input type="text" name="matricula" class="input-text" placeholder="Digite sua matrícula" required />
+    </div>
+
+    <!-- Categoria -->
+    <div class="card-question">
+      <div class="question-title">Categoria do Concurso <span class="required-star">*</span></div>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="categoria" value="Mister" required /> Mister
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="categoria" value="Miss" /> Miss
+        </label>
+      </div>
+    </div>
+
+    <!-- Selfie -->
+    <div class="card-question">
+      <div class="question-title">Tire uma Selfie <span class="required-star">*</span></div>
+      <div class="camera-container">
+        <video id="camera-video" class="camera-video" autoplay playsinline></video>
+        <canvas id="camera-canvas" class="photo-preview"></canvas>
+        <div class="camera-buttons">
+          <button type="button" id="btn-capturar" class="btn-camera btn-capture">
+            <i class="fas fa-camera"></i> Capturar
+          </button>
+          <button type="button" id="btn-retomar" class="btn-camera btn-retake" style="display:none;">
+            <i class="fas fa-redo"></i> Retomar
+          </button>
+        </div>
+      </div>
+      <input type="hidden" name="foto" id="foto-input" />
+    </div>
+
+    <!-- Footer -->
+    <div class="form-footer">
+      <button type="submit" id="btn-enviar" class="btn-primary">Enviar</button>
+      <button type="reset" class="clear-form" id="btn-limpar">Limpar formulário</button>
+    </div>
+  </form>
+</div>
+
+  <script>
+  const cameraVideo   = document.getElementById('camera-video');
+  const cameraCanvas  = document.getElementById('camera-canvas');
+  const btnCapturar   = document.getElementById('btn-capturar');
+  const btnRetomar    = document.getElementById('btn-retomar');
+  const fotoInput     = document.getElementById('foto-input');
+  const formCadastro  = document.getElementById('form-cadastro');
+  const toast         = document.getElementById('toast');
+
+  let stream = null;
+
+  // ── Iniciar câmera ──────────────────────────────
+  async function iniciarCamera() {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+      cameraVideo.srcObject = stream;
+      cameraVideo.style.display = 'block';
+      cameraCanvas.style.display = 'none';
+      btnCapturar.style.display  = 'inline-flex';
+      btnRetomar.style.display   = 'none';
+      fotoInput.value = '';
+    } catch (err) {
+      alert('Não foi possível acessar a câmera. Verifique as permissões do navegador.');
+      console.error(err);
+    }
+  }
+
+  // ── Capturar foto ───────────────────────────────
+  btnCapturar.addEventListener('click', () => {
+    cameraCanvas.width  = cameraVideo.videoWidth;
+    cameraCanvas.height = cameraVideo.videoHeight;
+    cameraCanvas.getContext('2d').drawImage(cameraVideo, 0, 0);
+
+    fotoInput.value = cameraCanvas.toDataURL('image/jpeg', 0.7);
+
+    cameraVideo.style.display  = 'none';
+    cameraCanvas.style.display = 'block';
+    btnCapturar.style.display  = 'none';
+    btnRetomar.style.display   = 'inline-flex';
+  });
+
+  // ── Retomar câmera ──────────────────────────────
+  btnRetomar.addEventListener('click', iniciarCamera);
+
+  // ── Limpar formulário ───────────────────────────
+  document.getElementById('btn-limpar').addEventListener('click', () => {
+    if (stream) stream.getTracks().forEach(t => t.stop());
+    formCadastro.reset();
+    iniciarCamera();
+  });
+
+  // ── Validação + Submit via Fetch ────────────────
+  formCadastro.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!fotoInput.value) {
+      alert('📸 Por favor, tire uma selfie antes de enviar!');
+      return;
+    }
+
+    const btnEnviar = formCadastro.querySelector('[type="submit"]');
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = 'Enviando...';
+
+    const formData = new FormData(formCadastro);
+
+    try {
+      const resp = await fetch('php/cadastrar_candidato.php', {
+        method: 'POST',
+        body: formData
+      });
+
+      const textoRaw = await resp.text();
+      console.log('📦 Resposta bruta do servidor:', textoRaw);
+
+      let dados;
+      try {
+        dados = JSON.parse(textoRaw);
+      } catch (err) {
+        alert('❌ Resposta inesperada do servidor:\n\n' + textoRaw.substring(0, 300));
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = 'Enviar';
+        return;
+      }
+
+      if (dados.sucesso) {
+        if (stream) stream.getTracks().forEach(t => t.stop());
+        window.location.href = 'html/votacao.html'; // ✅ caminho correto
+      } else {
+        alert('❌ Erro: ' + (dados.erro || 'Tente novamente.'));
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = 'Enviar';
+      }
+
+    } catch (err) {
+      console.error('❌ Erro no fetch:', err);
+      alert('Erro ao conectar com o servidor: ' + err.message);
+      btnEnviar.disabled = false;
+      btnEnviar.textContent = 'Enviar';
+    }
+  });
+
+  // ── Toast de sucesso (?sucesso=1) ───────────────
+  window.addEventListener('load', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('sucesso') === '1') {
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 4000);
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+    iniciarCamera();
+  });
+</script>
+
+
+</body>
+</html>

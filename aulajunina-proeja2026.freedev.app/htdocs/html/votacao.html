@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votação - Mister & Miss Caipira IFSP 2026</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/votacao.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="voting-container">
+        <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Início</a>
+        
+        <header class="voting-header">
+            <h1>VOTAÇÃO MISTER E MISS CAIPIRA - IFSP 2026</h1>
+            <p>Escolha os seus representantes da nossa Copa Junina. Apenas um voto por dispositivo!</p>
+        </header>
+
+        <!-- PLACAR DE LÍDERES -->
+        <section class="leaderboard-container glass-card">
+            <h2><i class="fas fa-trophy trophy-secondary"></i> Candidatos Mais Votados (Parcial)</h2>
+            <div class="leaderboard-grid">
+                <div class="leader-box">
+                    <div class="leader-icon-circle mr-color">
+                        <i class="fas fa-person"></i>
+                    </div>
+                    <div class="leader-data">
+                        <span class="leader-title">Mister Mais Votado</span>
+                        <strong id="top-mister-name">Carregando...</strong>
+                        <span class="leader-votes">
+                            <i class="fas fa-fire"></i>
+                            <span id="top-mister-votes">0</span> votos
+                        </span>
+                    </div>
+                </div>
+                <div class="leader-box">
+                    <div class="leader-icon-circle ms-color">
+                        <i class="fas fa-person-dress"></i>
+                    </div>
+                    <div class="leader-data">
+                        <span class="leader-title">Miss Mais Votada</span>
+                        <strong id="top-miss-name">Carregando...</strong>
+                        <span class="leader-votes">
+                            <i class="fas fa-fire"></i>
+                            <span id="top-miss-votes">0</span> votos
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRADE MISTER -->
+        <h2 class="section-title">
+            <i class="fas fa-user-friends"></i> Candidatos a Mister Caipira
+        </h2>
+        <main class="candidates-grid" id="grid-mister">
+            <!-- Cards gerados pelo votar.js -->
+        </main>
+
+        <!-- GRADE MISS -->
+        <h2 class="section-title">
+            <i class="fas fa-user-friends"></i> Candidatas a Miss Caipira
+        </h2>
+        <main class="candidates-grid" id="grid-miss">
+            <!-- Cards gerados pelo votar.js -->
+        </main>
+
+        <!-- REGRAS -->
+        <section class="rules-section glass-card">
+            <h3>Regras do Concurso</h3>
+            <ul>
+                <li>Apenas um voto por dispositivo/celular.</li>
+                <li>Você pode votar em <strong>um Mister</strong> e em <strong>uma Miss</strong>.</li>
+                <li>A contagem geral fica centralizada no painel de líderes acima.</li>
+                <li>Os votos são atualizados em tempo real.</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 IFSP - PROEJA</p>
+    </footer>
+
+    <script src="../js/votar.js"></script>
+</body>
+</html>

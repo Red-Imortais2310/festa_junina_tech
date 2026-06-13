@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matemática - Junina Tech 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/matematica.css">
+</head>
+<body>
+
+    <canvas id="canvas-particles"></canvas>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>📐 MATEMÁTICA JUNINA</h1>
+            <p>Teorema de Pitágoras com Bandeirinhas</p>
+        </header>
+
+        <div class="content-box">
+            <h2>🎪 Monte o Mastro e Calcule a Hipotenusa!</h2>
+            <p>Ajuste a altura do mastro e a distância da base para ver o cabo de bandeirinhas se formar.</p>
+
+            <div class="controls">
+                <div class="control-item">
+                    <label>Altura do Mastro (a): <span id="val-a">5</span>m</label>
+                    <input type="range" id="mastro-height" min="1" max="10" value="5" step="0.5" aria-label="Altura do Mastro">
+                </div>
+
+                <div class="control-item">
+                    <label>Distância da Base (b): <span id="val-b">5</span>m</label>
+                    <input type="range" id="mastro-base" min="1" max="10" value="5" step="0.5" aria-label="Distância da Base">
+                </div>
+            </div>
+
+            <div class="result-box">
+                <h3>📏 Hipotenusa (cabo): <span id="result-hypo">7.07</span>m</h3>
+                <p class="formula">Fórmula: h = √(a² + b²)</p>
+            </div>
+
+            <canvas id="math-canvas" width="400" height="300"></canvas>
+        </div>
+    </div>
+
+    <script src="../js/matematica.js"></script>
+
+</body>
+</html>
+
