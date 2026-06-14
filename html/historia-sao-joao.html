@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História de São João - Tese Acadêmica</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #020704;
+            color: #f0fdf4;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .story-hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: radial-gradient(ellipse at top, #0f2d1a 0%, #020704 70%);
+        }
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(2, 7, 4, 0.2) 0%,
+                rgba(2, 7, 4, 0.7) 60%,
+                rgba(2, 7, 4, 1) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 220, 100, 0.35);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 9px 26px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: #fde68a;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 6px 30px rgba(0, 0, 0, 0.85);
+            max-width: 820px;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 1.05rem;
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        .bandeirinhas {
+            display: flex;
+            gap: 6px;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .bandeirinha {
+            width: 22px;
+            height: 28px;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            animation: sway 2.5s ease-in-out infinite alternate;
+        }
+
+        .bandeirinha:nth-child(odd)  { animation-delay: 0s; }
+        .bandeirinha:nth-child(even) { animation-delay: 0.4s; }
+
+        .b1  { background: #ef4444; }
+        .b2  { background: #fbbf24; }
+        .b3  { background: #22c55e; }
+        .b4  { background: #3b82f6; }
+        .b5  { background: #a855f7; }
+        .b6  { background: #f97316; }
+        .b7  { background: #ec4899; }
+        .b8  { background: #14b8a6; }
+        .b9  { background: #ef4444; }
+        .b10 { background: #fbbf24; }
+
+        @keyframes sway {
+            from { transform: rotate(-8deg); }
+            to   { transform: rotate(8deg); }
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            animation: bounce-down 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .scroll-down i { font-size: 1.1rem; }
+
+        @keyframes bounce-down {
+            0%, 100% { transform: translateX(-50%) translateY(0);    opacity: 0.5; }
+            50%       { transform: translateX(-50%) translateY(10px); opacity: 1;   }
+        }
+
+        /* TELA DE ENTRADA - clique para iniciar */
+        .intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 7, 4, 0.92);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            backdrop-filter: blur(6px);
+            cursor: pointer;
+            transition: opacity 0.6s ease;
+        }
+
+        .intro-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-overlay h2 {
+            font-family: 'Playfair Display', serif;
+            color: #fde68a;
+            font-size: 2rem;
+            border: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        .intro-overlay p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .intro-overlay .enter-btn {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #fff;
+            border: none;
+            padding: 16px 42px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 1.5px;
+            box-shadow: 0 6px 28px rgba(22, 163, 74, 0.45);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .intro-overlay .enter-btn:hover {
+            transform: scale(1.06);
+            box-shadow: 0 10px 36px rgba(22, 163, 74, 0.65);
+        }
+
+        .intro-overlay .enter-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* ARTIGO */
+        .article {
+            max-width: 860px;
+            margin: -70px auto 100px auto;
+            background: rgba(8, 28, 14, 0.93);
+            border: 1px solid rgba(74, 222, 128, 0.14);
+            padding: 56px;
+            border-radius: 30px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75);
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(14px);
+        }
+
+        .back-link-styled {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 44px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
+        }
+
+        .back-link-styled:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(22, 163, 74, 0.5);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #fbbf24;
+            margin-top: 44px;
+            margin-bottom: 8px;
+            font-size: 1.55rem;
+            border-left: 4px solid #16a34a;
+            padding-left: 16px;
+            line-height: 1.4;
+        }
+
+        .divider {
+            width: 56px;
+            height: 3px;
+            background: linear-gradient(90deg, #16a34a, #fbbf24);
+            border-radius: 10px;
+            margin: 10px 0 24px 0;
+        }
+
+        p {
+            line-height: 1.95;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            text-align: justify;
+            opacity: 0.92;
+            color: #dcfce7;
+        }
+
+        em {
+            color: #86efac;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.25);
+            font-size: 0.82rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .article {
+                margin: -30px 14px 60px 14px;
+                padding: 28px 22px;
+            }
+            .hero-content h1 { font-size: 1.9rem; }
+            h2 { font-size: 1.25rem; }
+            p  { font-size: 0.97rem; }
+            .intro-overlay h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Áudio -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="../imagens/quadrilha.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- TELA DE ENTRADA (necessária por política dos navegadores) -->
+    <div class="intro-overlay" id="intro-overlay">
+        <div class="bandeirinhas">
+            <div class="bandeirinha b1"></div>
+            <div class="bandeirinha b2"></div>
+            <div class="bandeirinha b3"></div>
+            <div class="bandeirinha b4"></div>
+            <div class="bandeirinha b5"></div>
+            <div class="bandeirinha b6"></div>
+            <div class="bandeirinha b7"></div>
+            <div class="bandeirinha b8"></div>
+        </div>
+        <h2>🎉 Bem-vindo à Festa Junina!</h2>
+        <p>Clique para entrar e curtir com música</p>
+        <button class="enter-btn">
+            <i class="fas fa-hat-cowboy"></i> Entrar na Festa
+        </button>
+    </div>
+
+    <!-- HERO -->
+    <div class="story-hero">
+        <div class="video-overlay"></div>
+        <div class="hero-content">
+            <div class="bandeirinhas">
+                <div class="bandeirinha b1"></div>
+                <div class="bandeirinha b2"></div>
+                <div class="bandeirinha b3"></div>
+                <div class="bandeirinha b4"></div>
+                <div class="bandeirinha b5"></div>
+                <div class="bandeirinha b6"></div>
+                <div class="bandeirinha b7"></div>
+                <div class="bandeirinha b8"></div>
+                <div class="bandeirinha b9"></div>
+                <div class="bandeirinha b10"></div>
+            </div>
+
+            <span class="hero-badge">
+                <i class="fas fa-hat-cowboy"></i> &nbsp; Cultura & Folclore Brasileiro
+            </span>
+
+            <h1>
+                Origem e Trajetória <span>Histórica</span><br>do São João
+            </h1>
+
+            <p>
+                Do solstício pagão às fogueiras nordestinas — uma viagem pela origem,
+                transformação e chegada da <strong>Festa Junina</strong> ao Brasil.
+            </p>
+        </div>
+
+        <div class="scroll-down" id="scroll-down-btn">
+            <i class="fas fa-chevron-down"></i>
+            <span>Rolar</span>
+        </div>
+    </div>
+
+    <!-- ARTIGO -->
+    <main class="article">
+
+        <a href="../index.html" class="back-link-styled">
+            <i class="fas fa-arrow-left"></i> Voltar ao Início
+        </a>
+
+        <h2>1. Raízes Antigas: O Culto ao Solstício de Verão</h2>
+        <div class="divider"></div>
+        <p>A origem das festividades que celebramos no mês de junho remonta a rituais pagãos celebrados no hemisfério norte. Muito antes de sua incorporação ao calendário católico, os antigos povos agrários (celtas, germânicos, bascos, entre outros) prestavam reverência ao solstício de verão — momento em que o Sol atinge o ápice de sua declinação e o dia se torna o mais longo do ano.</p>
+        <p>Essas comemorações de fertilidade agradeciam pelas primeiras colheitas do ano e rogavam para que os solos não fossem devastados por pragas ou tempestades. O acendimento de fogueiras era considerado o ritual místico central. Acreditava-se que as chamas do fogo transmutador possuíam o poder de alimentar o Sol com calor regenerativo e repelir entidades malignas e pestes agrícolas.</p>
+
+        <h2>2. A Cristianização Medieval e a Construção da Liturgia Joanina</h2>
+        <div class="divider"></div>
+        <p>Com a hegemonia da Igreja Católica sobre a Europa na transição para a Idade Média, o processo de consolidação dogmática exigiu a reinterpretação e absorção de tradições pagãs arraigadas na cultura dos camponeses. Ao invés de extirpar o rito do fogo do solstício, a Igreja associou-o ao calendário litúrgico cristão, declarando o dia 24 de junho como a festa do nascimento de São João Batista.</p>
+        <p>Segundo a teologia bíblica, Santa Isabel, prima de Maria (mãe de Jesus), teria acendido uma grande fogueira sobre as colinas da Judeia para avisar a Maria que o menino João havia nascido. Através dessa fusão sincrética, os antigos festivais pagãos ganharam uma justificativa cristã. O sincretismo completou-se com a adição de outros santos ao ciclo junino: Santo Antônio, no dia 13 de junho (associado ao casamento e ritos amorosos de fertilidade), e São Pedro, em 29 de junho (guardião dos portões celestes e patrono dos pescadores).</p>
+
+        <h2>3. A Transposição Cultural para as Terras Brasileiras</h2>
+        <div class="divider"></div>
+        <p>A colonização das Américas trouxe a tradição das festas joaninas para o Brasil no século XVI pelas mãos dos colonizadores e dos missionários jesuítas. Ao aportar no território brasileiro, a festa portuguesa encontrou uma confluência cósmica e climática única: os povos indígenas nativos realizavam celebrações agrícolas dedicadas ao milho e à colheita no mesmo período do ano.</p>
+        <p>Com a vinda de escravizados africanos no transcorrer dos séculos, novos temperos gastronômicos, batidas rítmicas e manifestações folclóricas foram absorvidos por essa comemoração agrária. O milho consolidou-se como o coração gastronômico do festejo colonial por coincidir perfeitamente com a época da colheita no país, resultando no florescimento da culinária à base de pamonha, canjica, curau e bolos.</p>
+
+        <h2>4. A Quadrilha Junina: A Metamorfose de uma Dança de Elite</h2>
+        <div class="divider"></div>
+        <p>A dança da quadrilha, tão icônica na Festa Junina brasileira, teve um início aristocrático. Sua semente é a <em>"quadrille"</em>, uma dança de salão refinada e de compasso estrito que surgiu nos palácios da alta nobreza da França do século XVIII, executada em pares fixos.</p>
+        <p>Quando a Família Real Portuguesa se refugiou no Brasil em 1808, a aristocracia carioca passou a reproduzir os passos elegantes franceses em bailes oficiais. Com o passar das décadas, a população rural se apropriou da dança e transformou-a de forma disruptiva. Os comandos de passos aristocráticos foram satirizados e abrasileirados, incorporando o folclore caipira, sanfoneiros, vestimentas coloridas com chita, o teatro do <em>"casamento matuto"</em> e passos dinâmicos que deram à quadrilha a energia arrebatadora de herança nordestina.</p>
+
+    </main>
+
+    <footer>
+        &copy; 2026 Aula Junina-Tech &amp; Copa do Mundo. Proeja 1º/2º/3º Ano.
+    </footer>
+
+    <script>
+        // Scroll suave
+        document.getElementById('scroll-down-btn').addEventListener('click', () => {
+            document.querySelector('.article').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Autoplay com tela de entrada (obrigatório por política dos navegadores)
+        const audio   = document.getElementById('bg-audio');
+        const overlay = document.getElementById('intro-overlay');
+
+        overlay.addEventListener('click', () => {
+            audio.volume = 0.6;
+            audio.play().catch(err => console.warn('Erro ao tocar áudio:', err));
+            overlay.classList.add('hidden');
+            setTimeout(() => overlay.remove(), 700);
+        });
+    </script>
+
+</body>
+</html>

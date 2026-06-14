@@ -1,0 +1,13 @@
+/* filosofia.css */
+body { background: #050508; color: #eaeaea; font-family: 'Poppins', sans-serif; padding: 40px; }
+.container { max-width: 900px; margin: 0 auto; text-align: center; }
+.btn-back { display: inline-block; padding: 8px 25px; background: #ffd000; color: #000; font-weight: bold; border-radius: 50px; text-decoration: none; margin-bottom: 20px;}
+h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #ffd000; }
+.philosophy-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; text-align: left; }
+.cave-simulator { background: #000; border: 2px solid #333; height: 300px; border-radius: 15px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; }
+.wall { flex: 1; display: flex; align-items: center; justify-content: center; }
+.shadow { width: 50px; height: 100px; background: rgba(255,255,255,0.02); filter: blur(10px); transition: all 0.3s; transform: skewX(-15deg); }
+.interactive-panel { background: rgba(255, 208, 0, 0.05); border: 1px solid #ffd000; border-radius: 15px; padding: 30px; display: flex; flex-direction: column; justify-content: center; }
+.interactive-panel input { width: 100%; accent-color: #ffd000; margin: 20px 0; }
+.quote { font-style: italic; color: #ffd000; border-left: 3px solid #ffd000; padding-left: 15px; }
+@media(max-width: 768px){.philosophy-layout {grid-template-columns: 1fr;}}

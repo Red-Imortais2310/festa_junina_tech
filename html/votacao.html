@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votação - Mister & Miss Caipira IFSP 2026</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/votacao.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="voting-container">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Início</a>
+        
+        <header class="voting-header">
+            <h1>VOTAÇÃO MISTER E MISS CAIPIRA - IFSP 2026</h1>
+            <p>Escolha os seus representantes da nossa Copa Junina. Apenas um voto por dispositivo!</p>
+        </header>
+
+        <!-- Painel de Líderes Mantido -->
+        <section class="leaderboard-container glass-card">
+            <h2><i class="fas fa-trophy trophy-secondary"></i> Candidatos Mais Votados (Parcial)</h2>
+            <div class="leaderboard-grid">
+                <div class="leader-box">
+                    <div class="leader-icon-circle mr-color"><i class="fas fa-mannequin"></i></div>
+                    <div class="leader-data">
+                        <span class="leader-title">Mister Mais Votado</span>
+                        <strong id="top-mister-name">Carregando...</strong>
+                        <span class="leader-votes"><i class="fas fa-fire"></i> <span id="top-mister-votes">0</span> votos</span>
+                    </div>
+                </div>
+                <div class="leader-box">
+                    <div class="leader-icon-circle ms-color"><i class="fas fa-woman"></i></div>
+                    <div class="leader-data">
+                        <span class="leader-title">Miss Mais Votada</span>
+                        <strong id="top-miss-name">Carregando...</strong>
+                        <span class="leader-votes"><i class="fas fa-fire"></i> <span id="top-miss-votes">0</span> votos</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title"><i class="fas fa-user-friends"></i> Candidatos a Mister Caipira</h2>
+        <main class="candidates-grid" id="grid-mister">
+            <!-- Cards injetados via JS mantendo sua estrutura original -->
+        </main>
+
+        <h2 class="section-title"><i class="fas fa-user-friends"></i> Candidatas a Miss Caipira</h2>
+        <main class="candidates-grid" id="grid-miss">
+            <!-- Cards injetados via JS mantendo sua estrutura original -->
+        </main>
+
+        <section class="rules-section glass-card">
+            <h3>Regras do Concurso</h3>
+            <ul>
+                <li>Apenas um voto por dispositivo/celular.</li>
+                <li>A contagem geral fica centralizada no painel de líderes acima.</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 IFSP - PROEJA</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", carregarCandidatos);
+
+        async function carregarCandidatos() {
+            const response = await fetch('obter_votos.php');
+            const lista = await response.json();
+            
+            const gridMister = document.getElementById('grid-mister');
+            const gridMiss = document.getElementById('grid-miss');
+            
+            gridMister.innerHTML = '';
+            gridMiss.innerHTML = '';
+
+            lista.forEach(c => {
+                // AQUI ESTÁ A ESTRUTURA COMPLETA QUE VOCÊ CRIOU
+                const cardHTML = `
+                <div class="candidate-card glass-card" data-id="${c.id}">
+                    <div class="photo-container">
+                        <div class="flags-streamer"></div>
+                        <div class="gender-icon-wrapper">
+                            <img src="${c.foto_caminho}" alt="${c.nome}" class="candidate-photo">
+                        </div>
+                    </div>
+                    <div class="candidate-info">
+                        <h3>${c.nome}</h3>
+                        <button class="btn-vote" onclick="computarVoto(${c.id})">VOTAR</button>
+                    </div>
+                </div>`;
+                
+                if (c.categoria === 'Mister') gridMister.innerHTML += cardHTML;
+                else gridMiss.innerHTML += cardHTML;
+            });
+            verificarStatusVoto();
+        }
+
+        async function computarVoto(id) {
+            if (localStorage.getItem("junina_tech_voto_efetuado")) {
+                alert("🚫 Você já realizou o seu voto!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('id', id);
+            await fetch('votar.php', { method: 'POST', body: formData });
+
+            localStorage.setItem("junina_tech_voto_efetuado", "true");
+            location.reload();
+        }
+
+        function verificarStatusVoto() {
+            if (localStorage.getItem("junina_tech_voto_efetuado")) {
+                const botoes = document.querySelectorAll('.btn-vote');
+                botoes.forEach(btn => { 
+                    btn.disabled = true; 
+                    btn.innerText = "JÁ VOTADO"; 
+                });
+            }
+        }
+    </script>
+</body>
+</html>

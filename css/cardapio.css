@@ -1,0 +1,445 @@
+/* cardapio.css */
+:root {
+    --primary: #004b23;
+    --secondary: #ffd000;
+    --dark: #020704;
+    --tray-color: #5c3d2e;
+    --primary-light: #38b000;
+}
+
+body {
+    background-color: var(--dark);
+    color: #f0fdf4;
+    font-family: 'Poppins', sans-serif;
+    padding: 40px 20px;
+    overflow-x: hidden;
+}
+
+.menu-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    color: var(--secondary);
+    margin-bottom: 5px;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 8px 25px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    border: 1px solid var(--secondary);
+}
+
+/* CARROSEL 3D DA BANDEJA */
+.tray-viewport {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 80px 0;
+    position: relative;
+    height: 400px;
+}
+
+.tray-scene {
+    width: 600px;
+    height: 250px;
+    perspective: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wooden-tray {
+    position: relative;
+    width: 350px;
+    height: 60px;
+    background: var(--tray-color);
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    transform: rotateX(75deg);
+    box-shadow: 0 45px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(0,0,0,0.6);
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border: 10px solid #3d251e;
+}
+
+/* Pratos orbitantes */
+.tray-dish {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    left: calc(50% - 70px);
+    top: calc(50% - 70px);
+    transform-style: preserve-3d;
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
+}
+
+.tray-dish img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transform: rotateX(-75deg);
+    transition: transform 0.3s;
+}
+
+.tray-dish:hover img {
+    transform: rotateX(-75deg) scale(1.18);
+    border-color: var(--secondary);
+}
+
+.nav-btn {
+    background: var(--primary);
+    border: 2px solid var(--secondary);
+    color: #fff;
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.nav-btn:hover {
+    background: var(--secondary);
+    color: #000;
+    box-shadow: 0 0 15px var(--secondary);
+}
+
+/* Detalhes do Prato */
+.dish-details {
+    margin-top: -30px;
+    background: rgba(10,35,18,0.8);
+    border: 1px solid var(--secondary);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 50px;
+    border-radius: 20px;
+    min-width: 400px;
+}
+
+.dish-details h2 {
+    color: var(--secondary);
+    margin-bottom: 5px;
+}
+
+.dish-details p {
+    margin-bottom: 12px;
+}
+
+/* Botão de abertura */
+.open-recipe-btn {
+    background: var(--primary);
+    border: 1px solid var(--secondary);
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+
+.open-recipe-btn:hover {
+    background: var(--secondary);
+    color: #000;
+    box-shadow: 0 0 10px var(--secondary);
+}
+
+/* SLOTS */
+.slots-section {
+    margin-top: 80px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 40px;
+}
+
+.slots-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.slot-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(255,255,255,0.15);
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+}
+
+.slot-card strong {
+    color: var(--secondary);
+    margin-bottom: 3px;
+    text-align: center;
+}
+
+.slot-card span {
+    font-size: 0.75rem;
+    color: #8ce3a0;
+}
+
+.slot-card:hover {
+    background: rgba(56,176,0,0.15);
+    border-color: var(--primary-light);
+    color: #fff;
+    transform: scale(1.03);
+}
+
+/* ==========================================================================
+   MODAL DUPLO COM SUPORTE A IMAGENS E HISTÓRIA
+   ========================================================================== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-wrapper {
+    display: flex;
+    gap: 25px;
+    max-width: 950px;
+    width: 100%;
+    align-items: stretch;
+    animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Card de Receita */
+.recipe-card {
+    background: #faf6f0;
+    padding: 25px;
+    border-radius: 18px;
+    flex: 1.2;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    border: 3px solid var(--primary);
+    color: #1e2d24;
+    text-align: left;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+/* Container de Imagem HD no Modal */
+.recipe-img-container {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 2px solid var(--primary);
+}
+
+.recipe-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recipe-card h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 5px;
+}
+
+.recipe-card h3 {
+    font-size: 1.1rem;
+    color: #1c2e24;
+    margin: 15px 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.recipe-card ul {
+    list-style-position: inside;
+    margin-bottom: 15px;
+}
+
+.recipe-card li {
+    margin-bottom: 5px;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+
+.recipe-card p {
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 11;
+}
+
+.modal-close:hover {
+    background: #c0392b;
+    color: #fff;
+}
+
+/* Balão de História */
+.history-balloon {
+    background: #fdf2cf;
+    border: 3px solid #e6b800;
+    padding: 25px;
+    border-radius: 18px;
+    flex: 0.8;
+    color: #4a3319;
+    position: relative;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    max-height: 85vh;
+}
+
+.balloon-header h3 {
+    font-size: 1.2rem;
+    color: #8a5a00;
+    margin-bottom: 10px;
+    border-bottom: 2px dashed #e6b800;
+    padding-bottom: 8px;
+}
+
+/* ESTILOS DA NOVA ÁREA DE CURIOSIDADE DINÂMICA */
+.balloon-middle {
+    margin: 15px 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.curiosity-highlight-box {
+    background: rgba(230, 184, 0, 0.12);
+    border-left: 4px solid #e6b800;
+    padding: 15px;
+    border-radius: 0 14px 14px 0;
+    font-size: 0.9rem;
+    color: #5c3c00;
+    line-height: 1.55;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.sparkle-icon {
+    font-size: 1.3rem;
+    animation: pulseSparkle 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseSparkle {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+.balloon-body p {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.balloon-body p strong {
+    color: #5c3c00;
+}
+
+.balloon-body hr {
+    border: 0;
+    border-top: 1px dashed #e6b800;
+    margin: 12px 0;
+}
+
+.history-balloon-text {
+    font-style: italic;
+    color: #5c4327;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* Setinha do Balão de História */
+@media (min-width: 769px) {
+    .history-balloon::before {
+        content: "";
+        position: absolute;
+        left: -15px;
+        top: 60px;
+        width: 0; height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-right: 15px solid #fdf2cf;
+        filter: drop-shadow(-2px 0 1px rgba(230, 194, 128, 0.5));
+        z-index: 10;
+    }
+}
+
+/* Animações e Responsividade */
+@keyframes modalSlideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .modal-wrapper {
+        flex-direction: column;
+        max-height: 90vh;
+        overflow-y: auto;
+        gap: 15px;
+    }
+    .history-balloon {
+        order: 2;
+        max-height: none;
+    }
+    .recipe-card {
+        max-height: none;
+        overflow-y: visible;
+    }
+    .slots-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

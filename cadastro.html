@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrição - Concurso Mister & Miss Junina 2026</title>
+
+    <script defer src="https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+    <style>
+        :root {
+            --purple-google: #673ab7;
+            --bg-google: #f0ebf8;
+            --text-main: #202124;
+            --text-secondary: #70757a;
+            --border-color: #dadce0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-google);
+            color: var(--text-main);
+            padding: 12px 12px 60px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 640px;
+        }
+
+        .card-header {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            padding: 24px;
+        }
+
+        .card-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: var(--purple-google);
+        }
+
+        .card-header h1 {
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 36px;
+            margin-bottom: 12px;
+        }
+
+        .card-header p {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        .required-notice {
+            color: #d93025;
+            font-size: 14px;
+            margin-top: 22px;
+        }
+
+        .card-question {
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            margin-bottom: 12px;
+        }
+
+        .question-title {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 24px;
+            margin-bottom: 16px;
+        }
+
+        .required-star {
+            color: #d93025;
+            margin-left: 4px;
+        }
+
+        .question-description {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: -12px;
+            margin-bottom: 16px;
+            line-height: 16px;
+        }
+
+        .input-text {
+            width: 100%;
+            max-width: 360px;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 0;
+            font-size: 14px;
+            outline: none;
+            transition: border-bottom 0.2s;
+        }
+
+        .input-text:focus {
+            border-bottom: 2px solid var(--purple-google);
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            accent-color: var(--purple-google);
+            cursor: pointer;
+        }
+
+        /* ── Selfie ── */
+        .selfie-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #camera-container {
+            width: 100%;
+            max-width: 360px;
+            aspect-ratio: 3/4;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: none;
+        }
+
+        #video-selfie {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+        }
+
+        #face-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        #face-status {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        #preview-container {
+            width: 100%;
+            max-width: 360px;
+            aspect-ratio: 3/4;
+            border-radius: 12px;
+            overflow: hidden;
+            display: none;
+            border: 3px solid #34a853;
+        }
+
+        #foto-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+        }
+
+        .selfie-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 360px;
+        }
+
+        .btn-selfie {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-open-cam {
+            background-color: var(--purple-google);
+            color: white;
+        }
+
+        .btn-open-cam:hover {
+            background-color: #5b32a1;
+        }
+
+        .btn-open-cam:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .btn-capture {
+            background-color: #1a73e8;
+            color: white;
+            display: none;
+        }
+
+        .btn-capture:hover {
+            background-color: #1557b0;
+        }
+
+        .btn-capture:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .btn-retake {
+            background-color: #ea4335;
+            color: white;
+            display: none;
+        }
+
+        .btn-retake:hover {
+            background-color: #c5221f;
+        }
+
+        #ia-loading {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ccc;
+            border-top-color: var(--purple-google);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #foto-status {
+            font-size: 13px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            display: none;
+            text-align: center;
+            width: 100%;
+            max-width: 360px;
+        }
+
+        .status-ok {
+            background: #e6f4ea;
+            color: #137333;
+            border: 1px solid #34a853;
+        }
+
+        .status-erro {
+            background: #fce8e6;
+            color: #c5221f;
+            border: 1px solid #ea4335;
+        }
+
+        #foto-input-hidden {
+            display: none;
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+        }
+
+        .btn-submit {
+            background-color: var(--purple-google);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px rgba(60, 64, 67, 0.15);
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #5b32a1;
+        }
+
+        .btn-submit:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+
+        .clear-form {
+            color: var(--purple-google);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form id="form-inscricao" action="cadastrar_candidato.php" method="POST" enctype="multipart/form-data">
+
+        <div class="card-header">
+            <h1>Inscrição - Concurso Mister & Miss Junina 2026</h1>
+            <p>Preencha os dados abaixo corretamente para validar a sua participação no concurso cultural da Junina Tech.</p>
+            <div class="required-notice">* Indica que a pergunta é obrigatória</div>
+        </div>
+
+        <div class="card-question">
+            <div class="question-title">Nome Completo<span class="required-star">*</span></div>
+            <input type="text" name="nome" class="input-text" placeholder="Sua resposta" required>
+        </div>
+
+        <div class="card-question">
+            <div class="question-title">E-mail Institucional<span class="required-star">*</span></div>
+            <input type="email" name="email" class="input-text" placeholder="seu.email@ifsp.edu.br" required>
+        </div>
+
+        <div class="card-question">
+            <div class="question-title">Seu Curso<span class="required-star">*</span></div>
+            <input type="text" name="curso" class="input-text" placeholder="Sua resposta" required>
+        </div>
+
+        <div class="card-question">
+            <div class="question-title">Categoria do Concurso<span class="required-star">*</span></div>
+            <div class="radio-group">
+                <label class="radio-option">
+                    <input type="radio" name="categoria" value="Mister" required> Mister
+                </label>
+                <label class="radio-option">
+                    <input type="radio" name="categoria" value="Miss" required> Miss
+                </label>
+            </div>
+        </div>
+
+        <!-- SELFIE -->
+        <div class="card-question">
+            <div class="question-title">Tire sua Selfie<span class="required-star">*</span></div>
+            <div class="question-description">
+                A IA irá verificar se há um rosto visível na foto. Certifique-se de estar em um ambiente bem iluminado.
+            </div>
+            <div class="selfie-area">
+
+                <div id="ia-loading">
+                    <div class="spinner"></div>
+                    <span>Carregando modelos de IA...</span>
+                </div>
+
+                <div id="camera-container">
+                    <video id="video-selfie" autoplay playsinline muted></video>
+                    <canvas id="face-overlay"></canvas>
+                    <div id="face-status">🔍 Procurando rosto...</div>
+                </div>
+
+                <div id="preview-container">
+                    <img id="foto-preview" src="" alt="Sua selfie">
+                </div>
+
+                <div id="foto-status"></div>
+
+                <div class="selfie-buttons">
+                    <button type="button" class="btn-selfie btn-open-cam" id="btn-open-cam" disabled>
+                        📷 Tirar Selfie
+                    </button>
+                    <button type="button" class="btn-selfie btn-capture" id="btn-capture" disabled>
+                        🤳 Capturar Foto
+                    </button>
+                    <button type="button" class="btn-selfie btn-retake" id="btn-retake">
+                        🔄 Tirar Novamente
+                    </button>
+                </div>
+
+                <canvas id="canvas-capture" style="display:none;"></canvas>
+                <input type="file" name="foto" id="foto-input-hidden" accept="image/*">
+            </div>
+        </div>
+
+        <div class="form-footer">
+            <button type="submit" class="btn-submit" id="btn-enviar" disabled>Enviar</button>
+            <button type="reset" class="clear-form" onclick="resetarSelfie()">Limpar formulário</button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+window.addEventListener('load', () => {
+
+    const video         = document.getElementById('video-selfie');
+    const canvasCaptura = document.getElementById('canvas-capture');
+    const overlay       = document.getElementById('face-overlay');
+    const faceStatus    = document.getElementById('face-status');
+    const previewImg    = document.getElementById('foto-preview');
+    const fotoInput     = document.getElementById('foto-input-hidden');
+    const btnOpenCam    = document.getElementById('btn-open-cam');
+    const btnCapture    = document.getElementById('btn-capture');
+    const btnRetake     = document.getElementById('btn-retake');
+    const fotoStatus    = document.getElementById('foto-status');
+    const btnEnviar     = document.getElementById('btn-enviar');
+    const iaLoading     = document.getElementById('ia-loading');
+
+    let stream            = null;
+    let detectionLoop     = null;
+    let faceDetectada     = false;
+    let modelosCarregados = false;
+
+    // ✅ URL correta: GitHub via jsDelivr (contém a pasta /weights/)
+    const MODEL_URL = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/weights/';
+
+    // ─── 1. Carregar modelos ──────────────────────────────────
+    async function carregarModelos() {
+        try {
+            iaLoading.style.display = 'flex';
+            iaLoading.innerHTML = `<div class="spinner"></div><span>Carregando modelos de IA...</span>`;
+
+            await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+            await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+
+            modelosCarregados   = true;
+            btnOpenCam.disabled = false;
+
+            iaLoading.innerHTML = '✅ IA pronta!';
+            setTimeout(() => { iaLoading.style.display = 'none'; }, 2000);
+
+        } catch (e) {
+            console.error('Erro ao carregar modelos:', e);
+            iaLoading.innerHTML = '⚠️ Erro ao carregar IA. Recarregue a página.';
+        }
+    }
+
+    // ─── 2. Abrir câmera ──────────────────────────────────────
+    btnOpenCam.addEventListener('click', async () => {
+        if (!modelosCarregados) {
+            alert('Aguarde os modelos de IA carregarem!');
+            return;
+        }
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: 'user', width: { ideal: 720 }, height: { ideal: 960 } },
+                audio: false
+            });
+            video.srcObject = stream;
+            await video.play();
+
+            document.getElementById('camera-container').style.display = 'block';
+            btnOpenCam.style.display = 'none';
+            btnCapture.style.display = 'flex';
+
+            iniciarDeteccao();
+
+        } catch (err) {
+            console.error('Erro câmera:', err);
+            alert('❌ Não foi possível acessar a câmera. Verifique as permissões do navegador.');
+        }
+    });
+
+    // ─── 3. Loop de detecção facial ───────────────────────────
+    async function iniciarDeteccao() {
+        const ctx = overlay.getContext('2d');
+
+        detectionLoop = setInterval(async () => {
+            if (video.readyState !== 4) return;
+
+            overlay.width  = video.videoWidth;
+            overlay.height = video.videoHeight;
+
+            const deteccao = await faceapi
+                .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.4 }))
+                .withFaceLandmarks();
+
+            ctx.clearRect(0, 0, overlay.width, overlay.height);
+
+            if (deteccao) {
+                faceDetectada       = true;
+                btnCapture.disabled = false;
+                faceStatus.textContent      = '✅ Rosto detectado! Clique em Capturar.';
+                faceStatus.style.background = 'rgba(52,168,83,0.8)';
+
+                // Desenha retângulo espelhado
+                const box = deteccao.detection.box;
+                const x   = overlay.width - box.x - box.width;
+                ctx.strokeStyle = '#34a853';
+                ctx.lineWidth   = 3;
+                ctx.strokeRect(x, box.y, box.width, box.height);
+
+            } else {
+                faceDetectada       = false;
+                btnCapture.disabled = true;
+                faceStatus.textContent      = '🔍 Posicione seu rosto no centro...';
+                faceStatus.style.background = 'rgba(0,0,0,0.6)';
+            }
+        }, 400);
+    }
+
+    // ─── 4. Capturar foto ─────────────────────────────────────
+    btnCapture.addEventListener('click', async () => {
+        if (!faceDetectada) {
+            mostrarStatus('❌ Nenhum rosto detectado. Posicione-se melhor.', 'erro');
+            return;
+        }
+
+        canvasCaptura.width  = video.videoWidth;
+        canvasCaptura.height = video.videoHeight;
+        const ctx = canvasCaptura.getContext('2d');
+        ctx.drawImage(video, 0, 0);
+
+        // Valida rosto na foto estática capturada
+        const validacao = await faceapi
+            .detectSingleFace(canvasCaptura, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.4 }))
+            .withFaceLandmarks();
+
+        if (!validacao) {
+            mostrarStatus('❌ Não foi possível confirmar o rosto. Tente novamente.', 'erro');
+            return;
+        }
+
+        canvasCaptura.toBlob(blob => {
+            const arquivo = new File([blob], 'selfie.jpg', { type: 'image/jpeg' });
+            const dt = new DataTransfer();
+            dt.items.add(arquivo);
+            fotoInput.files = dt.files;
+
+            previewImg.src = canvasCaptura.toDataURL('image/jpeg');
+            document.getElementById('preview-container').style.display = 'block';
+            document.getElementById('camera-container').style.display  = 'none';
+
+            pararCamera();
+
+            btnCapture.style.display = 'none';
+            btnRetake.style.display  = 'flex';
+            btnEnviar.disabled       = false;
+
+            mostrarStatus('✅ Rosto verificado! Você pode enviar o formulário.', 'ok');
+        }, 'image/jpeg', 0.92);
+    });
+
+    // ─── 5. Tirar novamente ───────────────────────────────────
+    btnRetake.addEventListener('click', () => resetarSelfie());
+
+    window.resetarSelfie = function () {
+        pararCamera();
+        document.getElementById('camera-container').style.display  = 'none';
+        document.getElementById('preview-container').style.display = 'none';
+        fotoStatus.style.display = 'none';
+        previewImg.src  = '';
+        fotoInput.value = '';
+        btnOpenCam.style.display = 'flex';
+        btnCapture.style.display = 'none';
+        btnRetake.style.display  = 'none';
+        btnCapture.disabled = true;
+        btnEnviar.disabled  = true;
+        faceDetectada = false;
+    };
+
+    function pararCamera() {
+        clearInterval(detectionLoop);
+        if (stream) {
+            stream.getTracks().forEach(t => t.stop());
+            stream = null;
+        }
+    }
+
+    // ─── 6. Status visual ─────────────────────────────────────
+    function mostrarStatus(msg, tipo) {
+        fotoStatus.textContent   = msg;
+        fotoStatus.className     = tipo === 'ok' ? 'status-ok' : 'status-erro';
+        fotoStatus.style.display = 'block';
+    }
+
+    // ─── 7. Validação no submit ───────────────────────────────
+    document.getElementById('form-inscricao').addEventListener('submit', function (e) {
+        if (!fotoInput.files || fotoInput.files.length === 0) {
+            e.preventDefault();
+            mostrarStatus('❌ É obrigatório tirar a selfie antes de enviar!', 'erro');
+        }
+    });
+
+    // ─── Inicia ───────────────────────────────────────────────
+    carregarModelos();
+});
+</script>
+</body>
+</html>

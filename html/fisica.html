@@ -1,0 +1,43 @@
+<!-- fisica.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Física Junina - Simulador de Trajetória</title>
+    <link rel="stylesheet" href="../css/fisica.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="physics-container">
+        <a href="../index.html" class="back-btn">Voltar</a>
+        <h1>Física: Lançamento de Copa</h1>
+        <p>Ajuste os parâmetros vetoriais para chutar a bola de futebol da Copa no alvo da fogueira!</p>
+
+        <!-- Equações em LaTeX formatadas de acordo com as regras -->
+        <div class="formula-box">
+            $$y = x \tan(\theta) - \frac{g x^2}{2 v_0^2 \cos^2(\theta)}$$
+        </div>
+
+        <div class="simulator-layout">
+            <div class="controls">
+                <label>Velocidade Inicial ($$v_0$$): <span id="vel-val">25</span> m/s</label>
+                <input type="range" id="vel-input" min="10" max="40" value="25" aria-label="Velocidade Inicial">
+
+                <label>Ângulo de Chute ($$\theta$$): <span id="ang-val">45</span>°</label>
+                <input type="range" id="ang-input" min="15" max="75" value="45" aria-label="Ângulo de Chute">
+
+                <button id="fire-btn" class="fire-btn">CHUTAR BOLA!</button>
+            </div>
+            
+            <div class="canvas-wrapper">
+                <canvas id="physics-canvas" width="600" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Renderizador de LaTeX KaTeX/MathJax via CDN para as fórmulas -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../js/fisica.js"></script>
+</body>
+</html>
