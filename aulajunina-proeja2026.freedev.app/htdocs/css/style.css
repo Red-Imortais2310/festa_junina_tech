@@ -562,3 +562,36 @@ body {
     border: 1px solid var(--glass-border);
     margin-bottom: 12px;
 }
+
+/* 🚀 FIX DEFINITIVO ZOOM CANDIDATOS - FORÇA TOTAL */
+.candidate-card {
+    max-height: 340px !important;
+}
+
+.candidate-card .photo-container {
+    height: 130px !important;
+    max-height: 130px !important;
+    min-height: 130px !important;
+}
+
+.candidate-card img {
+    width: 95% !important;
+    height: 95% !important;
+    max-width: 95% !important;
+    max-height: 95% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    transform: scale(1) !important;
+    transition: none !important;
+}
+
+/* ❌ BLOQUEIA QUALQUER ZOOM */
+.candidate-card img:hover {
+    transform: none !important;
+}
+
+.candidate-card * img {
+    width: 95% !important;
+    height: 95% !important;
+    object-fit: cover !important;
+}

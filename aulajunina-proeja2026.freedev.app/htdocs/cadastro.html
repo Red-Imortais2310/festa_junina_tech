@@ -96,56 +96,44 @@
       width: 18px;
       height: 18px;
     }
-    .camera-container {
+    .file-input-wrapper {
       display: flex;
-      flex-direction: column;
       align-items: center;
       gap: 12px;
-      width: 100%;
+      margin-top: 8px;
     }
-    .camera-video {
-      width: 100%;
-      max-width: 400px;
-      border-radius: 12px;
-      border: 3px solid #7c3aed;
-      background: #000;
+    #photoInput {
+      display: none;
     }
-    .camera-buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 10px;
-    }
-    .btn-camera {
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: none;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: background 0.2s;
+    .file-label {
       display: flex;
       align-items: center;
       gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      color: white;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+      border: 2px dashed rgba(255,255,255,0.3);
     }
-    .btn-capture {
-      background: #28a745;
-      color: #fff;
+    .file-label:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(124,58,237,0.4);
     }
-    .btn-capture:hover { background: #218838; }
-    .btn-retake {
-      background: #dc3545;
-      color: #fff;
+    #fileName {
+      font-size: 14px;
+      color: #888;
+      font-style: italic;
     }
-    .btn-retake:hover { background: #c82333; }
-    .btn-primary {
-      background: #7c3aed;
-      color: #fff;
-    }
-    .btn-primary:hover { background: #6d28d9; }
     .photo-preview {
       width: 100%;
-      max-width: 400px;
+      max-width: 300px;
+      height: 400px;
       border-radius: 12px;
       border: 3px solid #7c3aed;
+      background: rgba(255,255,255,0.1);
       display: none;
     }
     .form-footer {
@@ -164,7 +152,10 @@
       border: none;
       font-size: 1rem;
       cursor: pointer;
+      background: #7c3aed;
+      color: #fff;
     }
+    #btn-enviar:hover { background: #6d28d9; }
     #btn-enviar:disabled {
       opacity: 0.45;
       cursor: not-allowed;
@@ -239,146 +230,133 @@
       </div>
     </div>
 
-    <!-- Selfie -->
+    <!-- Foto -->
     <div class="card-question">
-      <div class="question-title">Tire uma Selfie <span class="required-star">*</span></div>
-      <div class="camera-container">
-        <video id="camera-video" class="camera-video" autoplay playsinline></video>
-        <canvas id="camera-canvas" class="photo-preview"></canvas>
-        <div class="camera-buttons">
-          <button type="button" id="btn-capturar" class="btn-camera btn-capture">
-            <i class="fas fa-camera"></i> Capturar
-          </button>
-          <button type="button" id="btn-retomar" class="btn-camera btn-retake" style="display:none;">
-            <i class="fas fa-redo"></i> Retomar
-          </button>
-        </div>
+      <div class="question-title">Foto do Candidato <span class="required-star">*</span></div>
+      <div class="file-input-wrapper">
+        <input type="file" id="photoInput" name="foto" accept="image/jpeg,image/jpg,image/png" required>
+        <label for="photoInput" class="file-label">
+          <i class="fas fa-image"></i>
+          Escolher foto da galeria (JPG, PNG)
+        </label>
+        <span id="fileName">Nenhuma foto selecionada</span>
       </div>
-      <input type="hidden" name="foto" id="foto-input" />
+      <canvas id="photoPreview" class="photo-preview"></canvas>
     </div>
 
     <!-- Footer -->
     <div class="form-footer">
-      <button type="submit" id="btn-enviar" class="btn-primary">Enviar</button>
+      <button type="submit" id="btn-enviar">Enviar</button>
       <button type="reset" class="clear-form" id="btn-limpar">Limpar formulário</button>
     </div>
   </form>
 </div>
 
-  <script>
-  const cameraVideo   = document.getElementById('camera-video');
-  const cameraCanvas  = document.getElementById('camera-canvas');
-  const btnCapturar   = document.getElementById('btn-capturar');
-  const btnRetomar    = document.getElementById('btn-retomar');
-  const fotoInput     = document.getElementById('foto-input');
-  const formCadastro  = document.getElementById('form-cadastro');
-  const toast         = document.getElementById('toast');
+<script>
+const formCadastro = document.getElementById('form-cadastro');
+const photoInput = document.getElementById('photoInput');
+const photoPreview = document.getElementById('photoPreview');
+const fileName = document.getElementById('fileName');
+const toast = document.getElementById('toast');
 
-  let stream = null;
-
-  // ── Iniciar câmera ──────────────────────────────
-  async function iniciarCamera() {
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
-      cameraVideo.srcObject = stream;
-      cameraVideo.style.display = 'block';
-      cameraCanvas.style.display = 'none';
-      btnCapturar.style.display  = 'inline-flex';
-      btnRetomar.style.display   = 'none';
-      fotoInput.value = '';
-    } catch (err) {
-      alert('Não foi possível acessar a câmera. Verifique as permissões do navegador.');
-      console.error(err);
+// ── Preview da foto ─────────────────────────────
+photoInput.addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  
+  if (file) {
+    if (!file.type.match('image/(jpeg|jpg|png)')) {
+      alert('❌ Apenas JPG, JPEG ou PNG!');
+      photoInput.value = '';
+      return;
     }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      photoPreview.width = 300;
+      photoPreview.height = 400;
+      const ctx = photoPreview.getContext('2d');
+      const img = new Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, 300, 400);
+        photoPreview.style.display = 'block';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+    
+    fileName.textContent = file.name;
+  }
+});
+
+// ── Limpar formulário ───────────────────────────
+document.getElementById('btn-limpar').addEventListener('click', () => {
+  photoPreview.style.display = 'none';
+  fileName.textContent = 'Nenhuma foto selecionada';
+  photoInput.value = '';
+  formCadastro.reset();
+});
+
+// ── Validação + Submit via Fetch ────────────────
+formCadastro.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  if (!photoInput.files[0]) {
+    alert('📸 Por favor, selecione uma foto!');
+    return;
   }
 
-  // ── Capturar foto ───────────────────────────────
-  btnCapturar.addEventListener('click', () => {
-    cameraCanvas.width  = cameraVideo.videoWidth;
-    cameraCanvas.height = cameraVideo.videoHeight;
-    cameraCanvas.getContext('2d').drawImage(cameraVideo, 0, 0);
+  const btnEnviar = formCadastro.querySelector('[type="submit"]');
+  btnEnviar.disabled = true;
+  btnEnviar.textContent = 'Enviando...';
 
-    fotoInput.value = cameraCanvas.toDataURL('image/jpeg', 0.7);
+  const formData = new FormData(formCadastro);
 
-    cameraVideo.style.display  = 'none';
-    cameraCanvas.style.display = 'block';
-    btnCapturar.style.display  = 'none';
-    btnRetomar.style.display   = 'inline-flex';
-  });
+  try {
+    const resp = await fetch('php/cadastrar_candidato.php', {
+      method: 'POST',
+      body: formData
+    });
 
-  // ── Retomar câmera ──────────────────────────────
-  btnRetomar.addEventListener('click', iniciarCamera);
+    const textoRaw = await resp.text();
+    console.log('📦 Resposta bruta do servidor:', textoRaw);
 
-  // ── Limpar formulário ───────────────────────────
-  document.getElementById('btn-limpar').addEventListener('click', () => {
-    if (stream) stream.getTracks().forEach(t => t.stop());
-    formCadastro.reset();
-    iniciarCamera();
-  });
-
-  // ── Validação + Submit via Fetch ────────────────
-  formCadastro.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    if (!fotoInput.value) {
-      alert('📸 Por favor, tire uma selfie antes de enviar!');
+    let dados;
+    try {
+      dados = JSON.parse(textoRaw);
+    } catch (err) {
+      alert('❌ Resposta inesperada do servidor:\n\n' + textoRaw.substring(0, 300));
+      btnEnviar.disabled = false;
+      btnEnviar.textContent = 'Enviar';
       return;
     }
 
-    const btnEnviar = formCadastro.querySelector('[type="submit"]');
-    btnEnviar.disabled = true;
-    btnEnviar.textContent = 'Enviando...';
-
-    const formData = new FormData(formCadastro);
-
-    try {
-      const resp = await fetch('php/cadastrar_candidato.php', {
-        method: 'POST',
-        body: formData
-      });
-
-      const textoRaw = await resp.text();
-      console.log('📦 Resposta bruta do servidor:', textoRaw);
-
-      let dados;
-      try {
-        dados = JSON.parse(textoRaw);
-      } catch (err) {
-        alert('❌ Resposta inesperada do servidor:\n\n' + textoRaw.substring(0, 300));
-        btnEnviar.disabled = false;
-        btnEnviar.textContent = 'Enviar';
-        return;
-      }
-
-      if (dados.sucesso) {
-        if (stream) stream.getTracks().forEach(t => t.stop());
-        window.location.href = 'html/votacao.html'; // ✅ caminho correto
-      } else {
-        alert('❌ Erro: ' + (dados.erro || 'Tente novamente.'));
-        btnEnviar.disabled = false;
-        btnEnviar.textContent = 'Enviar';
-      }
-
-    } catch (err) {
-      console.error('❌ Erro no fetch:', err);
-      alert('Erro ao conectar com o servidor: ' + err.message);
+    if (dados.sucesso) {
+      window.location.href = 'html/votacao.html';
+    } else {
+      alert('❌ Erro: ' + (dados.erro || 'Tente novamente.'));
       btnEnviar.disabled = false;
       btnEnviar.textContent = 'Enviar';
     }
-  });
 
-  // ── Toast de sucesso (?sucesso=1) ───────────────
-  window.addEventListener('load', () => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('sucesso') === '1') {
-      toast.style.display = 'block';
-      setTimeout(() => toast.style.display = 'none', 4000);
-      window.history.replaceState({}, '', window.location.pathname);
-    }
-    iniciarCamera();
-  });
+  } catch (err) {
+    console.error('❌ Erro no fetch:', err);
+    alert('Erro ao conectar com o servidor: ' + err.message);
+    btnEnviar.disabled = false;
+    btnEnviar.textContent = 'Enviar';
+  }
+});
+
+// ── Toast de sucesso (?sucesso=1) ───────────────
+window.addEventListener('load', () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('sucesso') === '1') {
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 4000);
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+});
 </script>
-
 
 </body>
 </html>
+
