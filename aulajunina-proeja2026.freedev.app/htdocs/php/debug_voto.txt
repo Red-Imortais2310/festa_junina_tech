@@ -1,0 +1,144 @@
+
+=== 2026-06-14 01:27:41 ===
+Método: POST
+
+=== 2026-06-14 01:27:41 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryUzsRw9SYpPWcCshf
+
+=== 2026-06-14 01:27:41 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryUzsRw9SYpPWcCshf
+POST: Array
+(
+    [id] => 24
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Miss
+)
+
+
+=== 2026-06-14 01:27:41 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryUzsRw9SYpPWcCshf
+POST: Array
+(
+    [id] => 24
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Miss
+)
+
+Extraído → ID: 24 | Matrícula: device_1781309054607_qkmon2 | Categoria: Miss
+
+=== 2026-06-14 01:27:41 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryUzsRw9SYpPWcCshf
+POST: Array
+(
+    [id] => 24
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Miss
+)
+
+Extraído → ID: 24 | Matrícula: device_1781309054607_qkmon2 | Categoria: Miss
+✅ Conexão OK via config.php
+
+=== 2026-06-14 01:27:41 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryUzsRw9SYpPWcCshf
+POST: Array
+(
+    [id] => 24
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Miss
+)
+
+Extraído → ID: 24 | Matrícula: device_1781309054607_qkmon2 | Categoria: Miss
+✅ Conexão OK via config.php
+✅ Candidato: Gamora Sintra
+
+=== 2026-06-14 01:27:41 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryUzsRw9SYpPWcCshf
+POST: Array
+(
+    [id] => 24
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Miss
+)
+
+Extraído → ID: 24 | Matrícula: device_1781309054607_qkmon2 | Categoria: Miss
+✅ Conexão OK via config.php
+✅ Candidato: Gamora Sintra
+✅ VOTO OK - Total: 1
+
+=== 2026-06-14 01:28:08 ===
+Método: POST
+
+=== 2026-06-14 01:28:08 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryn2yjBAklxTst1CLc
+
+=== 2026-06-14 01:28:08 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryn2yjBAklxTst1CLc
+POST: Array
+(
+    [id] => 19
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Mister
+)
+
+
+=== 2026-06-14 01:28:08 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryn2yjBAklxTst1CLc
+POST: Array
+(
+    [id] => 19
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Mister
+)
+
+Extraído → ID: 19 | Matrícula: device_1781309054607_qkmon2 | Categoria: Mister
+
+=== 2026-06-14 01:28:08 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryn2yjBAklxTst1CLc
+POST: Array
+(
+    [id] => 19
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Mister
+)
+
+Extraído → ID: 19 | Matrícula: device_1781309054607_qkmon2 | Categoria: Mister
+✅ Conexão OK via config.php
+
+=== 2026-06-14 01:28:08 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryn2yjBAklxTst1CLc
+POST: Array
+(
+    [id] => 19
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Mister
+)
+
+Extraído → ID: 19 | Matrícula: device_1781309054607_qkmon2 | Categoria: Mister
+✅ Conexão OK via config.php
+✅ Candidato: Neymar Junior
+
+=== 2026-06-14 01:28:08 ===
+Método: POST
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryn2yjBAklxTst1CLc
+POST: Array
+(
+    [id] => 19
+    [matricula_votante] => device_1781309054607_qkmon2
+    [categoria_voto] => Mister
+)
+
+Extraído → ID: 19 | Matrícula: device_1781309054607_qkmon2 | Categoria: Mister
+✅ Conexão OK via config.php
+✅ Candidato: Neymar Junior
+✅ VOTO OK - Total: 1

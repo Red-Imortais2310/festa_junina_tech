@@ -19,16 +19,18 @@
             <p>Escolha os seus representantes da nossa Copa Junina. Apenas um voto por dispositivo!</p>
         </header>
 
-        <!-- PLACAR DE LÍDERES -->
+        <!-- PLACAR DE LÍDERES COM FOTOS -->
         <section class="leaderboard-container glass-card">
             <h2><i class="fas fa-trophy trophy-secondary"></i> Candidatos Mais Votados (Parcial)</h2>
             <div class="leaderboard-grid">
+
+                <!-- Mister Líder -->
                 <div class="leader-box">
-                    <div class="leader-icon-circle mr-color">
-                        <i class="fas fa-person"></i>
+                    <div class="leader-photo-container">
+                        <img id="top-mister-photo" src="../uploads/foto_6a2c9fc0466d6.jpg" alt="Mister Líder" class="leader-photo">
                     </div>
                     <div class="leader-data">
-                        <span class="leader-title">Mister Mais Votado</span>
+                        <span class="leader-title">MISTER MAIS VOTADO</span>
                         <strong id="top-mister-name">Carregando...</strong>
                         <span class="leader-votes">
                             <i class="fas fa-fire"></i>
@@ -36,12 +38,14 @@
                         </span>
                     </div>
                 </div>
+
+                <!-- Miss Líder -->
                 <div class="leader-box">
-                    <div class="leader-icon-circle ms-color">
-                        <i class="fas fa-person-dress"></i>
+                    <div class="leader-photo-container">
+                        <img id="top-miss-photo" src="../uploads/foto_6a2c9fc0466d6.jpg" alt="Miss Líder" class="leader-photo">
                     </div>
                     <div class="leader-data">
-                        <span class="leader-title">Miss Mais Votada</span>
+                        <span class="leader-title">MISS MAIS VOTADA</span>
                         <strong id="top-miss-name">Carregando...</strong>
                         <span class="leader-votes">
                             <i class="fas fa-fire"></i>
@@ -49,6 +53,7 @@
                         </span>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -56,17 +61,13 @@
         <h2 class="section-title">
             <i class="fas fa-user-friends"></i> Candidatos a Mister Caipira
         </h2>
-        <main class="candidates-grid" id="grid-mister">
-            <!-- Cards gerados pelo votar.js -->
-        </main>
+        <main class="candidates-grid" id="grid-mister"></main>
 
         <!-- GRADE MISS -->
         <h2 class="section-title">
             <i class="fas fa-user-friends"></i> Candidatas a Miss Caipira
         </h2>
-        <main class="candidates-grid" id="grid-miss">
-            <!-- Cards gerados pelo votar.js -->
-        </main>
+        <main class="candidates-grid" id="grid-miss"></main>
 
         <!-- REGRAS -->
         <section class="rules-section glass-card">

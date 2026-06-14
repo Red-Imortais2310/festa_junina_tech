@@ -1,4 +1,12 @@
-/* votacao.css */
+/* votacao.css - VERSÃO TURBINADA: FOTO GIGANTE + ANIMAÇÃO DE ALTO IMPACTO */
+
+:root {
+    --primary: #00d4ff;
+    --primary-light: #33e0ff;
+    --secondary: #ffd700;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
 
 .voting-container {
     max-width: 1300px;
@@ -38,13 +46,14 @@
     margin-top: 5px;
 }
 
-/* PAINEL DE DESTAQUES DOS MAIS VOTADOS (TOP 1) */
+/* 🎯 CONTAINER DOS LÍDERES */
 .leaderboard-container {
     background: var(--card-bg);
     border: 2px solid var(--secondary);
     border-radius: 15px;
-    padding: 20px;
+    padding: 30px;
     margin-bottom: 40px;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -52,112 +61,189 @@
     font-size: 1.3rem;
     color: #fff;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .leaderboard-grid {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
+/* 🎯 CARD DO LÍDER - QUADRADO E COM ANIMAÇÃO FORTE */
 .leader-box {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start; /* 🎯 COMEÇA PELO TOPO PARA DAR ESPAÇO À FOTO */
     gap: 15px;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px 30px;
-    border-radius: 10px;
-    min-width: 280px;
-    border: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 15px;
+    flex: 1;
+    max-width: 450px;
+    aspect-ratio: 1 / 1;
+    border: 2px solid var(--secondary);
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* 🎯 ANIMAÇÃO DE PULSO DE BRILHO FORTE */
+    animation: intenseGlow 2s infinite alternate ease-in-out;
 }
 
-.leader-icon-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+@keyframes intenseGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.2), inset 0 0 10px rgba(255, 215, 0, 0.1);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 0 35px rgba(255, 215, 0, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.3);
+        transform: scale(1.01);
+    }
+}
+
+.leader-box:hover {
+    transform: translateY(-5px) scale(1.02);
+    background: #000;
+}
+
+/* 🎯 FOTO GIGANTE - O DESTAQUE PRINCIPAL */
+.leader-photo-container {
+    width: 100%;
+    height: 70%; /* 🎯 OCUPA 70% DA ALTURA DO CARD */
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 2.2rem;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 3px solid var(--secondary);
+    margin-bottom: 5px;
+    /* 🎯 ANIMAÇÃO NA FOTO TAMBÉM */
+    animation: photoZoom 4s infinite alternate ease-in-out;
 }
 
-.mr-color { background: #0077b6; color: #fff; }
-.ms-color { background: #ff0055; color: #fff; }
+@keyframes photoZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
 
+.leader-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 🎯 DADOS ABAIXO DA FOTO */
 .leader-data {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
 }
 
 .leader-title {
-    font-size: 0.8rem;
-    opacity: 0.7;
+    font-size: 0.85rem;
+    color: var(--secondary);
     text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
 .leader-data strong {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     color: #fff;
     margin: 2px 0;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }
 
 .leader-votes {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     color: var(--secondary);
-    font-weight: 600;
+    font-weight: 700;
+}
+
+/* RESPONSIVO CELULAR - MANTENDO LADO A LADO */
+@media (max-width: 768px) {
+    .leaderboard-grid {
+        gap: 15px;
+    }
+    
+    .leader-box {
+        padding: 10px;
+    }
+    
+    .leader-photo-container {
+        height: 60%;
+    }
+
+    .leader-data strong {
+        font-size: 1rem;
+    }
+
+    .leader-title {
+        font-size: 0.6rem;
+    }
+
+    .leader-votes {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .leaderboard-grid {
+        gap: 10px;
+    }
+    
+    .leader-photo-container {
+        height: 55%;
+    }
 }
 
 /* SEÇÕES DOS GRIDS */
 .section-title {
     color: var(--secondary);
     font-size: 1.5rem;
-    margin: 30px 0 15px 0;
+    margin: 40px 0 20px 0;
     border-left: 4px solid var(--primary-light);
     padding-left: 10px;
 }
 
 .candidates-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
 }
-/* CARDS DOS CANDIDATOS */
+
+/* CARDS CANDIDATOS - MENOR (220px) */
 .candidate-card {
     background: var(--card-bg);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 15px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    max-width: 220px;
+    transition: transform 0.2s ease;
 }
 
-/* ADICIONE ESTES DOIS BLOCOS LOGO ABAIXO DO SEU CARD: */
-
-.photo-container {
-    width: 100%;
-    height: 150px; /* Controla a altura máxima da área da foto */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-bottom: 10px;
+.candidate-card:hover {
+    transform: translateY(-3px);
 }
-
-.candidate-photo {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Garante que a imagem encolha e caiba inteira sem cortes */
-    border-radius: 8px;
-}
-
 
 .photo-container {
     position: relative;
@@ -170,9 +256,9 @@
     align-items: center;
     justify-content: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 12px;
 }
 
-/* Linha de bandeirinhas juninas no topo */
 .flags-streamer {
     position: absolute;
     top: 0;
@@ -197,7 +283,7 @@
     font-weight: 600;
 }
 
-/* BOTÃO DE VOTO */
+/* BOTÕES */
 .btn-vote {
     width: 100%;
     padding: 8px 0;
@@ -216,7 +302,6 @@
     background: var(--secondary);
 }
 
-/* TRAVAS DE BOTÃO */
 .btn-vote.voted-active {
     background: #ff0055 !important;
     color: #fff !important;

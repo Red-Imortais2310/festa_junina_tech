@@ -1,188 +1,135 @@
 const API_LISTAR = '../php/listar_candidatos.php';
 const API_VOTAR  = '../php/votar.php';
 
-// ─────────────────────────────────────────
-// NORMALIZAR CAMINHO DA FOTO
-// ─────────────────────────────────────────
+// =============================================
+// NORMALIZAR CAMINHO DA FOTO - VERSÃO FINAL
+// =============================================
 function getFotoSrc(foto) {
     if (!foto || foto.trim() === '') {
         return '../uploads/sem-foto.png';
     }
-    if (foto.startsWith('http') || foto.startsWith('/')) {
-        return foto;
-    }
-    if (foto.startsWith('uploads/')) {
-        return '../' + foto;
-    }
+
+    foto = foto.trim();
+
+    // Remove "uploads/" duplicado se existir
+    foto = foto.replace(/^uploads\//i, '');
+
+    // Retorna caminho correto
     return '../uploads/' + foto;
 }
 
-// ─────────────────────────────────────────
+// =============================================
 // CARREGAR CANDIDATOS
-// ─────────────────────────────────────────
+// =============================================
 async function carregarCandidatos() {
     try {
-        const response = await fetch(`${API_LISTAR}?t=${Date.now()}`, {
-            method: 'GET',
-            cache: 'no-store'
-        });
-
-        if (!response.ok) throw new Error('Erro ao buscar candidatos.');
-
+        const response = await fetch(`${API_LISTAR}?t=${Date.now()}`, { cache: 'no-store' });
         const dados = await response.json();
 
-        if (!dados.sucesso) {
-            alert('❌ Erro: ' + (dados.mensagem || 'Não foi possível carregar.'));
-            return;
-        }
+        if (!dados.sucesso) return;
 
-        const candidatos = dados.candidatos;
+        const candidatos = dados.candidatos || [];
 
-        const gridMister = document.getElementById('grid-mister');
-        const gridMiss   = document.getElementById('grid-miss');
-
-        // ✅ Usa arrays para montar HTML — evita reflow do DOM a cada card
-        const htmlMister = [];
-        const htmlMiss   = [];
-
-        if (gridMister) gridMister.innerHTML = '';
-        if (gridMiss)   gridMiss.innerHTML   = '';
+        document.getElementById('grid-mister').innerHTML = '';
+        document.getElementById('grid-miss').innerHTML = '';
 
         let topMister = null;
-        let topMiss   = null;
+        let topMiss = null;
 
         const jaVotouMister = localStorage.getItem('junina_voto_mister') === 'true';
         const jaVotouMiss   = localStorage.getItem('junina_voto_miss')   === 'true';
 
         candidatos.forEach(c => {
-            const votos  = Number(c.votos) || 0;
+            const votos = Number(c.votos) || 0;
 
-            if (c.categoria === 'Mister' && (!topMister || votos > Number(topMister.votos))) {
+            if (c.categoria === 'Mister' && (!topMister || votos > Number(topMister.votos || 0))) {
                 topMister = c;
             }
-            if (c.categoria === 'Miss' && (!topMiss || votos > Number(topMiss.votos))) {
+            if (c.categoria === 'Miss' && (!topMiss || votos > Number(topMiss.votos || 0))) {
                 topMiss = c;
             }
 
-            const jaVotou = c.categoria === 'Mister' ? jaVotouMister : jaVotouMiss;
             const fotoSrc = getFotoSrc(c.foto);
-
-            // ✅ Escapa nome para evitar XSS no innerHTML
-            const nomeSeguro = c.nome_social
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;');
+            const nomeSeguro = (c.nome_social || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[m] || m);
 
             const cardHTML = `
                 <div class="candidate-card glass-card" data-id="${c.id}">
                     <div class="photo-container">
                         <div class="flags-streamer"></div>
-                        <div class="gender-icon-wrapper">
-                            <img 
-                                src="${fotoSrc}" 
-                                alt="${nomeSeguro}" 
-                                class="candidate-photo"
-                                onerror="this.onerror=null; this.src='../uploads/sem-foto.png';"
-                            >
-                        </div>
+                        <img src="${fotoSrc}" alt="${nomeSeguro}" class="candidate-photo"
+                             onerror="this.onerror=null; this.src='../uploads/sem-foto.png';">
                     </div>
                     <div class="candidate-info">
                         <h3>${nomeSeguro}</h3>
-                        <button 
-                            class="btn-vote" 
-                            onclick="computarVoto(${c.id}, '${c.categoria}')"
-                            ${jaVotou ? 'disabled' : ''}
-                        >
-                            ${jaVotou ? '✅ JÁ VOTADO' : '🗳️ VOTAR'}
+                        <button class="btn-vote" onclick="computarVoto(${c.id}, '${c.categoria}')"
+                            ${ (jaVotouMister && c.categoria==='Mister') || (jaVotouMiss && c.categoria==='Miss') ? 'disabled' : '' }>
+                            ${ (jaVotouMister && c.categoria==='Mister') || (jaVotouMiss && c.categoria==='Miss') ? '✅ JÁ VOTADO' : '🗳️ VOTAR' }
                         </button>
                     </div>
                 </div>
             `;
 
-            if (c.categoria === 'Mister') htmlMister.push(cardHTML);
-            if (c.categoria === 'Miss')   htmlMiss.push(cardHTML);
+            if (c.categoria === 'Mister') document.getElementById('grid-mister').innerHTML += cardHTML;
+            if (c.categoria === 'Miss')   document.getElementById('grid-miss').innerHTML += cardHTML;
         });
-
-        // ✅ Insere tudo de uma vez — muito mais eficiente
-        if (gridMister) gridMister.innerHTML = htmlMister.join('');
-        if (gridMiss)   gridMiss.innerHTML   = htmlMiss.join('');
 
         atualizarLideres(topMister, topMiss);
 
     } catch (err) {
-        console.error('Erro ao carregar candidatos:', err);
-        alert('❌ Não foi possível carregar os candidatos.');
+        console.error(err);
     }
 }
 
-// ─────────────────────────────────────────
-// ATUALIZAR LÍDERES NO TOPO
-// ─────────────────────────────────────────
+// =============================================
+// ATUALIZAR LÍDERES
+// =============================================
 function atualizarLideres(mister, miss) {
-    const nMister = document.getElementById('top-mister-name');
-    const vMister = document.getElementById('top-mister-votes');
-    const nMiss   = document.getElementById('top-miss-name');
-    const vMiss   = document.getElementById('top-miss-votes');
+    document.getElementById('top-mister-name').textContent = mister ? mister.nome_social : 'Nenhum ainda';
+    document.getElementById('top-mister-votes').textContent = mister ? mister.votos : '0';
+    const pMister = document.getElementById('top-mister-photo');
+    if (pMister) pMister.src = mister ? getFotoSrc(mister.foto) : '../uploads/sem-foto.png';
 
-    if (nMister) nMister.textContent = mister ? mister.nome_social : 'Nenhum ainda';
-    if (vMister) vMister.textContent = mister ? mister.votos       : '0';
-    if (nMiss)   nMiss.textContent   = miss   ? miss.nome_social   : 'Nenhuma ainda';
-    if (vMiss)   vMiss.textContent   = miss   ? miss.votos         : '0';
+    document.getElementById('top-miss-name').textContent = miss ? miss.nome_social : 'Nenhuma ainda';
+    document.getElementById('top-miss-votes').textContent = miss ? miss.votos : '0';
+    const pMiss = document.getElementById('top-miss-photo');
+    if (pMiss) pMiss.src = miss ? getFotoSrc(miss.foto) : '../uploads/sem-foto.png';
 }
 
-// ─────────────────────────────────────────
-// COMPUTAR VOTO
-// ─────────────────────────────────────────
+// =============================================
+// COMPUTAR VOTO (simplificado)
+// =============================================
 async function computarVoto(id, categoria) {
     const chaveLocal = categoria === 'Mister' ? 'junina_voto_mister' : 'junina_voto_miss';
 
     if (localStorage.getItem(chaveLocal) === 'true') {
-        alert('🚫 Você já votou nesta categoria!');
+        alert('Você já votou nesta categoria!');
         return;
     }
 
-    const confirmar = confirm('Confirma seu voto neste candidato?');
-    if (!confirmar) return;
+    if (!confirm('Confirma seu voto?')) return;
 
-    // ✅ Gera identificador único por dispositivo
-    let matricula = localStorage.getItem('junina_matricula_device');
-    if (!matricula) {
-        matricula = 'device_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
-        localStorage.setItem('junina_matricula_device', matricula);
-    }
+    let matricula = localStorage.getItem('junina_matricula_device') || 'device_' + Date.now() + '_' + Math.random().toString(36).substring(2,8);
+    localStorage.setItem('junina_matricula_device', matricula);
 
     try {
         const formData = new FormData();
-        formData.append('id',                id);
+        formData.append('id', id);
         formData.append('matricula_votante', matricula);
-        formData.append('categoria_voto',    categoria);
+        formData.append('categoria_voto', categoria);
 
-        const response = await fetch(API_VOTAR, {
-            method: 'POST',
-            body: formData,
-            cache: 'no-store'
-        });
-
-        if (!response.ok) throw new Error('Erro na requisição.');
-
+        const response = await fetch(API_VOTAR, { method: 'POST', body: formData });
         const dados = await response.json();
 
         if (dados.sucesso) {
             localStorage.setItem(chaveLocal, 'true');
-            alert('✅ Voto registrado! Junina Tech agradece 🎉');
-            await carregarCandidatos();
+            alert('✅ Voto registrado!');
+            carregarCandidatos();
         } else {
-            alert('❌ ' + (dados.mensagem || 'Erro ao votar. Tente novamente.'));
+            alert('❌ ' + (dados.erro || 'Erro ao votar'));
         }
-
-    } catch (err) {
-        console.error('Erro na requisição:', err);
-        alert('❌ Não foi possível conectar ao servidor.');
+    } catch (e) {
+        alert('❌ Erro de conexão');
     }
 }
 
-// ─────────────────────────────────────────
-// INICIALIZAÇÃO
-// ─────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', carregarCandidatos);
